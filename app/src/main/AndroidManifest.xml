@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -14,7 +15,7 @@
             android:supportsRtl="true"
             android:theme="@style/mytheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity">
+        <activity android:name=".View.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -22,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".PDetailsActivity"
+                android:name=".View.PDetailsActivity"
                 android:label="@string/app_name" />
 
         <meta-data
@@ -39,7 +40,7 @@
         <!-- android:name=".DetailsActivity" -->
         <!-- android:label="@string/title_activity_pdetails" /> -->
 
-        <activity android:name=".FavDetailsActivity"
+        <activity android:name=".View.FavDetailsActivity"
         />
     </application>
 
