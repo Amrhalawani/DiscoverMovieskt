@@ -1,4 +1,4 @@
-package com.amrhal.discovermovieskt.View;
+package com.amrhal.discovermovieskt.view.details;
 
 import android.app.Activity;
 

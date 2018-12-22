@@ -15,7 +15,7 @@
             android:supportsRtl="true"
             android:theme="@style/mytheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".View.MainActivity">
+        <activity android:name=".view.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".View.PDetailsActivity"
+                android:name=".view.details.PDetailsActivity"
                 android:label="@string/app_name" />
 
         <meta-data
@@ -40,7 +40,7 @@
         <!-- android:name=".DetailsActivity" -->
         <!-- android:label="@string/title_activity_pdetails" /> -->
 
-        <activity android:name=".View.FavDetailsActivity"
+        <activity android:name=".view.favDetails.FavDetailsActivity"
         />
     </application>
 
