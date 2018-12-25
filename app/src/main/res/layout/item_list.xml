@@ -8,7 +8,6 @@
     android:layout_height="wrap_content"
     android:adjustViewBounds="true"
     android:clickable="true"
-    android:contentDescription="TODO"
     android:focusable="true"
     android:scaleType="fitCenter"
     />

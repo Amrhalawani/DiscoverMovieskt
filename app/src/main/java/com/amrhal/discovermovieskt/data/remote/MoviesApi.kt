@@ -22,3 +22,4 @@ interface MoviesApi {
     fun getMovieReviews(@Path("id") id: String, @Query("api_key") apiKey: String): Call<ResponseBody>
 
 }
+
