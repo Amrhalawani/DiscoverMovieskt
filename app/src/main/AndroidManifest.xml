@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools" package="com.amrhal.discovermovieskt">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.amrhal.discovermovieskt">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <application
             android:allowBackup="true"
@@ -14,9 +14,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/mytheme"
-
-            tools:ignore="GoogleAppIndexingWarning"
-    >
+            tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".view.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -26,24 +24,25 @@
         </activity>
         <activity
                 android:name=".view.details.PDetailsActivity"
-                android:label="@string/app_name" />
+                android:label="@string/app_name"/>
 
         <meta-data
                 android:name="preloaded_fonts"
-                android:resource="@array/preloaded_fonts" />
+                android:resource="@array/preloaded_fonts"/>
 
-        <!--<provider-->
-                <!--android:name=".database.MovieProvider"-->
-                <!--android:authorities="amrhal.example.com.discovermovies2"-->
-                <!--android:enabled="true"-->
-                <!--android:exported="false" />-->
+        <!-- <provider -->
+        <!-- android:name=".database.MovieProvider" -->
+        <!-- android:authorities="amrhal.example.com.discovermovies2" -->
+        <!-- android:enabled="true" -->
+        <!-- android:exported="false" /> -->
+
 
         <!-- <activity -->
         <!-- android:name=".DetailsActivity" -->
         <!-- android:label="@string/title_activity_pdetails" /> -->
 
-        <activity android:name=".view.favDetails.FavDetailsActivity"
-        />
+        <activity android:name=".view.favDetails.FavDetailsActivity"/>
+
     </application>
 
 </manifest>

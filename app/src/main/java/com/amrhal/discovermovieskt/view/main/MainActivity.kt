@@ -1,9 +1,10 @@
 package com.amrhal.discovermovieskt.view.main
 
-import android.net.Uri
+import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,50 +20,59 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        recyclerviewSetup()
-        observeFromViewModel()
+       // recyclerviewSetup()
 
-    }
+        recyclerviewID.layoutManager = GridLayoutManager(applicationContext, 2)
 
-    private fun recyclerviewSetup() {
-
-        //list = dummyList()
-
-        recyclerviewID.layoutManager = GridLayoutManager(this, 2)
         adaptor = MoviesAdaptor(list, this) {
             Toast.makeText(this, "${it.title} Clicked", Toast.LENGTH_SHORT).show()
         }
         recyclerviewID.adapter = adaptor
+        observeFromViewModel()
+    }
+
+    private fun recyclerviewSetup() {
+
+        list = dummyList()
+
+        recyclerviewID.layoutManager = GridLayoutManager(applicationContext, 2)
+
+        adaptor = MoviesAdaptor(list, this) {
+            Toast.makeText(this, "${it.title} Clicked", Toast.LENGTH_SHORT).show()
+        }
         adaptor?.updateMoviesList(list)
+        recyclerviewID.adapter = adaptor
+
+        Toast.makeText(this, "list = ${list.size}", Toast.LENGTH_SHORT).show()
 
     }
 
     private fun dummyList(): ArrayList<Movie.Result> {
-        val listid = arrayListOf<Int>()
-        listid.add(6)
+        val listid = List<Int>(2) { 5 }
 
-        val list = arrayListOf<Movie.Result>()
-        for (i in 1..3) {
-            list.add(
+
+        val listf = arrayListOf<Movie.Result>()
+        for (i in 1..5) {
+            listf.add(
                 Movie.Result(
                     false,
-                    "",
+                    "a",
                     listid,
                     i,
-                    "",
-                    "",
-                    "",
+                    "a",
+                    "a",
+                    "a",
                     1.1,
                     "https://appledentures.ca/wp-content/uploads/2015/11/person1.jpg",
-                    "",
+                    "a",
                     "title $i",
                     false,
-                    0.0,
+                    0.05,
                     2
                 )
             )
         }
-        return list
+        return listf
     }
 
     private fun observeFromViewModel() {
@@ -72,9 +82,12 @@ class MainActivity : AppCompatActivity() {
         model.getTopMovies().observe(this, Observer<Movie> { result ->
             Toast.makeText(this, "Movie Delivered", Toast.LENGTH_SHORT).show()
             list = result.results as ArrayList<Movie.Result>
-            //list = dummyList()
+
+
             adaptor?.updateMoviesList(list)
+
         })
     }
+
 
 }

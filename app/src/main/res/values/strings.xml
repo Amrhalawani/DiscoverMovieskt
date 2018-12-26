@@ -5,7 +5,10 @@
     <string name="Fav_movies">Favorites</string>
 
     <string name="trying_to_connect_to_internet">Trying to Connect to internet…</string>
-    <string name="lorem_ipsem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to </string>
+    <string name="lorem_ipsem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+        has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+        and scrambled it to
+    </string>
 
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="large_text">
@@ -88,4 +91,5 @@
     <string name="lorem_ipsem_title_en">lorem ipsem title (EN)</string>
     <string name="emptyview">There Is No Favorite Movies</string>
     <string name="title_here">TITLE HERE</string>
+    <string name="title_activity_test">TestActivity</string>
 </resources>

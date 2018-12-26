@@ -18,11 +18,16 @@ import kotlinx.android.synthetic.main.item_list.view.*
  * Created by Amr hal on 19/12/2018.
  */
 
-class MoviesAdaptor(
-    var moviesList: ArrayList<Movie.Result>,
+class MoviesAdaptor(var moviesList: List<Movie.Result>,
     var context: Context,
     val listener: (Movie.Result) -> Unit
 ) : RecyclerView.Adapter<MovieViewHolder>() {
+
+    fun updateMoviesList(newitems: List<Movie.Result>) {
+        moviesList = newitems
+        notifyDataSetChanged()
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(LayoutInflater.from(context).inflate(R.layout.item_list, parent, false))
@@ -30,17 +35,16 @@ class MoviesAdaptor(
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(moviesList[position], listener)
+
     }
 
 
-    fun updateMoviesList(newitems: ArrayList<Movie.Result>) {
-        moviesList = newitems
-        notifyDataSetChanged()
-    }
+
 
     // Gets the number of animals in the list
     override fun getItemCount(): Int {
 
+        Log.e("tag","List getItemCount() = ${moviesList.size}")
         return moviesList.size
     }
 }
@@ -49,7 +53,7 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
     fun bind(movieitem: Movie.Result, listener: (Movie.Result) -> Unit) = with(itemView) {
-        itemView.movieposterIV_ID.loadUrlPicasso(movieitem.posterPath.toString())
+        itemView.movieposterIV_ID.loadUrlPicasso(movieitem.posterPath)
         //itemView.testText.text = movieitem.title
         setOnClickListener { listener(movieitem) }
 
@@ -59,6 +63,8 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     //extension Fun
     private fun ImageView.loadUrlPicasso(url: String) {
         Picasso.get().load("https://image.tmdb.org/t/p/w185$url").into(this)
+      //  Picasso.get().load(url).into(this)
+
         Log.e("tag","https://image.tmdb.org/t/p/w185$url")
     }
 
@@ -67,15 +73,6 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         Glide.with(context)
             .load(url)
             .into(this)
-
-        //     GlideApp
-//         .with(myFragment)
-//         .load(url)
-//         .centerCrop()
-//         .placeholder(R.drawable.loading_spinner)
-//         .into(myImageView)
-
-
     }
 
 }
