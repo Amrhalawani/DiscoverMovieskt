@@ -11,8 +11,21 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.amrhal.discovermovieskt.R
 import com.amrhal.discovermovieskt.data.model.Movie
 import kotlinx.android.synthetic.main.activity_main.*
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+import com.gigamole.navigationtabstrip.NavigationTabStrip
+import androidx.viewpager.widget.ViewPager
+
+
+
+
 
 class MainActivity : AppCompatActivity() {
+    var bottomNavigationView: BottomNavigationViewEx? = null
+
+
+    private val mViewPager: ViewPager? = null
+    private var mTopNavigationTabStrip: NavigationTabStrip? = null
+
 
     var list: ArrayList<Movie.Result> = arrayListOf()
     var adaptor: MoviesAdaptor? = null
@@ -20,31 +33,85 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-       // recyclerviewSetup()
+        setupBottomNav()
 
-        recyclerviewID.layoutManager = GridLayoutManager(applicationContext, 2)
+        setupTabLayout()
 
-        adaptor = MoviesAdaptor(list, this) {
-            Toast.makeText(this, "${it.title} Clicked", Toast.LENGTH_SHORT).show()
-        }
-        recyclerviewID.adapter = adaptor
+
+        recyclerviewSetup()
+
         observeFromViewModel()
+        button.setOnClickListener {
+
+            bottomNavigationView?.visibility = View.GONE
+        }
+
+
+    }
+
+    private fun setupTabLayout() {
+        mTopNavigationTabStrip =  findViewById(R.id.nts_top)
+        mTopNavigationTabStrip?.setTabIndex(0, true)
+    }
+
+
+//    fun initUI() {
+//        mViewPager = (ViewPager) findViewById(R.id.vp);
+//        mTopNavigationTabStrip = (NavigationTabStrip) findViewById(R.id.nts_top);
+//
+//    }
+//
+//    fun setUI() {
+//        mViewPager.setAdapter( PagerAdapter() {
+//            @Override
+//            public int getCount() {
+//                return 3;
+//            }
+//
+//            @Override
+//            public boolean isViewFromObject(final View view, final Object object) {
+//                return view.equals(object);
+//            }
+//
+//            @Override
+//            public void destroyItem(final View container, final int position, final Object object) {
+//                ((ViewPager) container).removeView((View) object);
+//            }
+//
+//            @Override
+//            public Object instantiateItem(final ViewGroup container, final int position) {
+//                final View view = new View(getBaseContext());
+//                container.addView(view);
+//                return view;
+//            }}
+//        })
+//
+//        mTopNavigationTabStrip.setTabIndex(1, true)
+
+
+    private fun setupBottomNav()
+
+    {
+        bottomNavigationView = findViewById<BottomNavigationViewEx>(R.id.main_bottom_navigation)
+        bottomNavigationView?.enableAnimation(true)
+        bottomNavigationView?.enableItemShiftingMode(false)
+        bottomNavigationView?.enableShiftingMode(true)
+        bottomNavigationView?.setTextVisibility(true)
+
+
     }
 
     private fun recyclerviewSetup() {
 
-        list = dummyList()
-
+       // list = dummyList()
         recyclerviewID.layoutManager = GridLayoutManager(applicationContext, 2)
 
         adaptor = MoviesAdaptor(list, this) {
             Toast.makeText(this, "${it.title} Clicked", Toast.LENGTH_SHORT).show()
         }
-        adaptor?.updateMoviesList(list)
+       // adaptor?.updateMoviesList(list)
         recyclerviewID.adapter = adaptor
-
         Toast.makeText(this, "list = ${list.size}", Toast.LENGTH_SHORT).show()
-
     }
 
     private fun dummyList(): ArrayList<Movie.Result> {
@@ -82,8 +149,6 @@ class MainActivity : AppCompatActivity() {
         model.getTopMovies().observe(this, Observer<Movie> { result ->
             Toast.makeText(this, "Movie Delivered", Toast.LENGTH_SHORT).show()
             list = result.results as ArrayList<Movie.Result>
-
-
             adaptor?.updateMoviesList(list)
 
         })

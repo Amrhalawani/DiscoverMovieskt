@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="titles">
+        <item>Popularity</item>
+        <item>Top Rated</item>
+        <item>Now Playing</item>
+        <item>Up Coming</item>
+
+    </string-array>
+
+</resources>

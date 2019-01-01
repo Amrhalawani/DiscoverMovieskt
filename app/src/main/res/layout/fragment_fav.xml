@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools"
-                                                   android:id="@+id/frame_layout"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent"
-                                                   android:background="@drawable/user_placeholder"
-                                                   tools:context="amrhal.example.com.discovermovies2.FavFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/user_placeholder"
+        tools:context="amrhal.example.com.discovermovies2.FavFragment">
 
 
     <Button
-        android:id="@+id/btn_fakedateID"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:text="insert fake data"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent" />
+            android:id="@+id/btn_fakedateID"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="insert fake data"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
-        android:id="@+id/btn_deleteAlldataID"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginEnd="8dp"
-        android:text="delete all"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent" />
+            android:id="@+id/btn_deleteAlldataID"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginEnd="8dp"
+            android:text="delete all"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
 
     <!--<ListView-->
@@ -36,50 +37,50 @@
 
 
     <TextView
-        android:id="@+id/empty_title_text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/fragment_background"
-        android:fontFamily="sans-serif-medium"
-        android:gravity="center"
-        android:text="@string/emptyview"
-        android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="#ffffff"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/empty_title_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/fragment_background"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="@string/emptyview"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#ffffff"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
     <GridView
-        android:id="@+id/Gridlist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:clipToPadding="false"
-        android:columnWidth="180dp"
-        android:numColumns="2"
+            android:id="@+id/Gridlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:columnWidth="180dp"
+            android:numColumns="2"
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageButton
-        android:id="@+id/imagebuttonback"
-        android:layout_width="55dp"
-        android:layout_height="50dp"
-        android:alpha="0.6"
-        android:backgroundTint="#2a3a56"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+            android:id="@+id/imagebuttonback"
+            android:layout_width="55dp"
+            android:layout_height="50dp"
+            android:alpha="0.6"
+            android:backgroundTint="#2a3a56"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow_back_black_24dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

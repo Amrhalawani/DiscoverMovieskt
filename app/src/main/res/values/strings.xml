@@ -1,8 +1,10 @@
 <resources>
-    <string name="app_name">Discover movies</string>
+    <string name="app_name">Discover Movies</string>
     <string name="popularity">Popularity</string>
     <string name="top_rated">Top Rated</string>
     <string name="Fav_movies">Favorites</string>
+    <string name="up_coming">Up Coming</string>
+    <string name="now_playing">Now Playing</string>
 
     <string name="trying_to_connect_to_internet">Trying to Connect to internet…</string>
     <string name="lorem_ipsem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
@@ -92,4 +94,13 @@
     <string name="emptyview">There Is No Favorite Movies</string>
     <string name="title_here">TITLE HERE</string>
     <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="trending">Trending</string>
+    <string name="upcoming">Upcoming</string>
+
 </resources>

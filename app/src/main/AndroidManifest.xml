@@ -42,7 +42,10 @@
         <!-- android:label="@string/title_activity_pdetails" /> -->
 
         <activity android:name=".view.favDetails.FavDetailsActivity"/>
-
+        <activity
+                android:name=".Main2Activity"
+                android:label="@string/title_activity_main2">
+        </activity>
     </application>
 
 </manifest>
