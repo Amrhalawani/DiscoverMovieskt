@@ -3,22 +3,31 @@ package com.amrhal.discovermovieskt.view.main.fragments
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-
+import androidx.lifecycle.Observer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import com.amrhal.discovermovieskt.R
+import com.amrhal.discovermovieskt.data.model.Movie
 import com.amrhal.discovermovieskt.util.GlideApp
+import com.amrhal.discovermovieskt.view.main.MoviesAdaptor
+import com.amrhal.discovermovieskt.view.main.mainActivityViewModel
 
 import com.bumptech.glide.request.target.BitmapImageViewTarget
 import kotlinx.android.synthetic.main.frag_home.*
 
 class HomeFragment : Fragment() {
 
-    companion object {
 
-        var homeFragment:HomeFragment? = null
+    var list: ArrayList<Movie.Result> = arrayListOf()
+    var adaptor: MoviesAdaptor? = null
+
+    companion object {
+        private var homeFragment:HomeFragment? = null
         fun getInstance():HomeFragment{
 
             if (homeFragment == null) { //singlton pettern
@@ -35,22 +44,7 @@ class HomeFragment : Fragment() {
 
     private val imageUrl = "https://static.pexels.com/photos/596940/pexels-photo-596940.jpeg"
 
-    fun loadImage(){
-        //during downloading we will see prograssbar and after finish prograssbar will become invisible
 
-        progressBar.visibility = View.VISIBLE
-//        GlideApp.with(activity!!).asBitmap()
-//            .load(Uri.parse(imageUrl))
-//            .into(object: BitmapImageViewTarget(firstFragmentImageView){
-//                override fun onResourceReady( // when the is ready
-//                    resource: Bitmap,
-//                    transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?
-//                ) {
-//                    super.onResourceReady(resource, transition)
-//                progressBar.visibility = View.INVISIBLE
-//                }
-//            })
-    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.frag_home,container,false)
     }
@@ -58,6 +52,32 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        loadImage()
+        recyclerviewSetup()
+        observeFromViewModel()
     }
+
+    private fun recyclerviewSetup() {
+
+       // list = dummyList()
+        recyclerviewID.layoutManager = GridLayoutManager(activity, 2)
+
+        adaptor = MoviesAdaptor(list as List<Movie.Result>, this.activity!!) {
+            Toast.makeText(activity , "${it.title} Clicked", Toast.LENGTH_SHORT).show()
+        }
+       // adaptor?.updateMoviesList(list)
+        recyclerviewID.adapter = adaptor
+        Toast.makeText(activity, "list = ${list.size}", Toast.LENGTH_SHORT).show()
+    }
+    private fun observeFromViewModel() {
+
+        val model = ViewModelProviders.of(this).get(mainActivityViewModel::class.java)
+
+        model.getPopulerMovies().observe(this, Observer<Movie> { result ->
+            Toast.makeText(activity, "Movie Delivered", Toast.LENGTH_SHORT).show()
+            list = result.results as ArrayList<Movie.Result>
+            adaptor?.updateMoviesList(list)
+
+        })
+    }
+
 }

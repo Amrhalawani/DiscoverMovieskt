@@ -39,20 +39,68 @@ object ServiceRepo {
     }
 
 
-    fun getPopularMovies(): LiveData<String> {
-        val data = MutableLiveData<String>()
-
+    fun getPopular(): LiveData<Movie> {
+        val data =  MutableLiveData<Movie>()
         retrofit?.getPopularMovies(BuildConfig.API_KEY)?.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                data.value = response.body()?.string()
+                val MResponse:String? = response.body()?.string()
+                val gson = Gson()
+                val movie = gson.fromJson(MResponse, Movie::class.java)
+                data.value = movie
             }
-
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("tag","onFailure throw : ${t.localizedMessage}")
             }
         })
-
         return data
     }
 
+    fun getNowPlaying(): LiveData<Movie> {
+        val data =  MutableLiveData<Movie>()
+
+        retrofit?.getNowPlayingMovies(BuildConfig.API_KEY)?.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                val MResponse:String? = response.body()?.string()
+                val gson = Gson()
+                val movie = gson.fromJson(MResponse, Movie::class.java)
+                data.value = movie
+            }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.e("tag","onFailure throw : ${t.localizedMessage}")
+            }
+        })
+        return data
+    }
+
+    fun getUpComing(): LiveData<Movie> {
+        val data =  MutableLiveData<Movie>()
+        retrofit?.getUpComingMovies(BuildConfig.API_KEY)?.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                val MResponse:String? = response.body()?.string()
+                val gson = Gson()
+                val movie = gson.fromJson(MResponse, Movie::class.java)
+                data.value = movie
+            }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.e("tag","onFailure throw : ${t.localizedMessage}")
+            }
+        })
+        return data
+    }
+
+    fun getTrending(): LiveData<Movie> {
+        val data =  MutableLiveData<Movie>()
+        retrofit?.getTrendingMovies(BuildConfig.API_KEY)?.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                val MResponse:String? = response.body()?.string()
+                val gson = Gson()
+                val movie = gson.fromJson(MResponse, Movie::class.java)
+                data.value = movie
+            }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.e("tag","onFailure throw : ${t.localizedMessage}")
+            }
+        })
+        return data
+    }
 }

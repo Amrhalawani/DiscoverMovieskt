@@ -1,15 +1,12 @@
 package com.amrhal.discovermovieskt.view.main
 
-import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
 import com.amrhal.discovermovieskt.R
 import com.amrhal.discovermovieskt.data.model.Movie
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,8 +21,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    val mHome_fragment = HomeFragment.getInstance()
-    val mSearch_fragment = SearchFragment.getInstance()
+    val mHomeFragment = HomeFragment.getInstance()
+    val mSearchFragment = SearchFragment.getInstance()
     val mFavFragment = FavFragment.getInstance()
 
 
@@ -33,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private val mViewPager: ViewPager? = null
-    private var mTopNavigationTabStrip: NavigationTabStrip? = null
+    var mTopNavigationTabStrip: NavigationTabStrip? = null
 
 
     var list: ArrayList<Movie.Result> = arrayListOf()
@@ -51,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
         // recyclerviewSetup()
 
-        observeFromViewModel()
+       // observeFromViewModel()
         button.setOnClickListener {
 
             bottomNavigationView?.visibility = View.GONE
@@ -113,15 +110,18 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.home_menu_item -> {
-                    setupFragment(mHome_fragment)
+                    setupFragment(mHomeFragment)
+                    mTopNavigationTabStrip?.visibility = View.VISIBLE
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.search_menu_item -> {
-                    setupFragment(mSearch_fragment)
+                    setupFragment(mSearchFragment)
+                    mTopNavigationTabStrip?.visibility = View.GONE
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.fev_movies_menu_item -> {
                     setupFragment(mFavFragment)
+                    mTopNavigationTabStrip?.visibility = View.GONE
                     return@OnNavigationItemSelectedListener true
                 }
 
@@ -175,17 +175,17 @@ class MainActivity : AppCompatActivity() {
         return listf
     }
 
-    private fun observeFromViewModel() {
-
-        val model = ViewModelProviders.of(this).get(mainActivityViewModel::class.java)
-
-        model.getTopMovies().observe(this, Observer<Movie> { result ->
-            Toast.makeText(this, "Movie Delivered", Toast.LENGTH_SHORT).show()
-            list = result.results as ArrayList<Movie.Result>
-            adaptor?.updateMoviesList(list)
-
-        })
-    }
+//    private fun observeFromViewModel() {
+//
+//        val model = ViewModelProviders.of(this).get(mainActivityViewModel::class.java)
+//
+//        model.getTopMovies().observe(this, Observer<Movie> { result ->
+//            Toast.makeText(this, "Movie Delivered", Toast.LENGTH_SHORT).show()
+//            list = result.results as ArrayList<Movie.Result>
+//            adaptor?.updateMoviesList(list)
+//
+//        })
+//    }
 
 
     private fun setupFragment(fragment: Fragment) { //using polymorphism

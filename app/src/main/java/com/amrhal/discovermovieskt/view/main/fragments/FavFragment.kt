@@ -40,23 +40,6 @@ class FavFragment : Fragment() {
 
     private val imageUrl = "https://images.pexels.com/photos/163065/mobile-phone-android-apps-phone-163065.jpeg"
 
-    fun loadImage(){
-
-        // during downloading, we will see the progress bar and after it finished progress bar will become invisible
-
-        progressBar3.visibility = View.VISIBLE
-//        GlideApp.with(activity!!).asBitmap()
-//            .load(Uri.parse(imageUrl))
-//            .into(object: BitmapImageViewTarget(secondFragmentImageView){
-//                override fun onResourceReady(  // when is ready
-//                    resource: Bitmap,
-//                    transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?
-//                ) {
-//                    super.onResourceReady(resource, transition)
-//                progressBar2.visibility = View.INVISIBLE
-//                }
-//            })
-    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate( R.layout.frag_fav_movies,container,false )
         return view
@@ -65,6 +48,5 @@ class FavFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        loadImage()
     }
 }
