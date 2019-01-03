@@ -4,8 +4,10 @@ import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.amrhal.discovermovieskt.R
@@ -14,12 +16,19 @@ import kotlinx.android.synthetic.main.activity_main.*
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
 import com.gigamole.navigationtabstrip.NavigationTabStrip
 import androidx.viewpager.widget.ViewPager
-
-
-
+import com.amrhal.discovermovieskt.view.main.fragments.FavFragment
+import com.amrhal.discovermovieskt.view.main.fragments.HomeFragment
+import com.amrhal.discovermovieskt.view.main.fragments.SearchFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
+
+    val mHome_fragment = HomeFragment.getInstance()
+    val mSearch_fragment = SearchFragment.getInstance()
+    val mFavFragment = FavFragment.getInstance()
+
+
     var bottomNavigationView: BottomNavigationViewEx? = null
 
 
@@ -29,6 +38,8 @@ class MainActivity : AppCompatActivity() {
 
     var list: ArrayList<Movie.Result> = arrayListOf()
     var adaptor: MoviesAdaptor? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         setupTabLayout()
 
 
-        recyclerviewSetup()
+        // recyclerviewSetup()
 
         observeFromViewModel()
         button.setOnClickListener {
@@ -50,7 +61,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupTabLayout() {
-        mTopNavigationTabStrip =  findViewById(R.id.nts_top)
+        mTopNavigationTabStrip = findViewById(R.id.nts_top)
         mTopNavigationTabStrip?.setTabIndex(0, true)
     }
 
@@ -89,9 +100,7 @@ class MainActivity : AppCompatActivity() {
 //        mTopNavigationTabStrip.setTabIndex(1, true)
 
 
-    private fun setupBottomNav()
-
-    {
+    private fun setupBottomNav() {
         bottomNavigationView = findViewById<BottomNavigationViewEx>(R.id.main_bottom_navigation)
         bottomNavigationView?.enableAnimation(true)
         bottomNavigationView?.enableItemShiftingMode(false)
@@ -99,19 +108,43 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView?.setTextVisibility(true)
 
 
+        bottomNavigationView?.onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
+
+
+            when (it.itemId) {
+                R.id.home_menu_item -> {
+                    setupFragment(mHome_fragment)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.search_menu_item -> {
+                    setupFragment(mSearch_fragment)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.fev_movies_menu_item -> {
+                    setupFragment(mFavFragment)
+                    return@OnNavigationItemSelectedListener true
+                }
+
+
+            }
+            return@OnNavigationItemSelectedListener false
+
+        }
+
+
     }
 
     private fun recyclerviewSetup() {
 
-       // list = dummyList()
-        recyclerviewID.layoutManager = GridLayoutManager(applicationContext, 2)
-
-        adaptor = MoviesAdaptor(list, this) {
-            Toast.makeText(this, "${it.title} Clicked", Toast.LENGTH_SHORT).show()
-        }
-       // adaptor?.updateMoviesList(list)
-        recyclerviewID.adapter = adaptor
-        Toast.makeText(this, "list = ${list.size}", Toast.LENGTH_SHORT).show()
+//       // list = dummyList()
+//        recyclerviewID.layoutManager = GridLayoutManager(applicationContext, 2)
+//
+//        adaptor = MoviesAdaptor(list, this) {
+//            Toast.makeText(this, "${it.title} Clicked", Toast.LENGTH_SHORT).show()
+//        }
+//       // adaptor?.updateMoviesList(list)
+//        recyclerviewID.adapter = adaptor
+//        Toast.makeText(this, "list = ${list.size}", Toast.LENGTH_SHORT).show()
     }
 
     private fun dummyList(): ArrayList<Movie.Result> {
@@ -154,5 +187,12 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+
+    private fun setupFragment(fragment: Fragment) { //using polymorphism
+
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame_layout, fragment)
+        fragmentTransaction.commit()
+    }
 
 }
