@@ -19,11 +19,10 @@ class FavFragment : Fragment() {
 
 
 
-
     companion object {
 
         var favfragment:FavFragment? = null
-        fun getInstance():FavFragment{  //singlton pettern
+        fun getInstance():FavFragment{  //singleton pattern
 
             if (favfragment == null) {
                 favfragment= FavFragment()

@@ -3,6 +3,7 @@ package com.amrhal.discovermovieskt.view.main
 import androidx.lifecycle.Observer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -15,13 +16,15 @@ import com.gigamole.navigationtabstrip.NavigationTabStrip
 import androidx.viewpager.widget.ViewPager
 import com.amrhal.discovermovieskt.view.main.fragments.FavFragment
 import com.amrhal.discovermovieskt.view.main.fragments.HomeFragment
+import com.amrhal.discovermovieskt.view.main.fragments.HomeFragmentsPagerAdapter
 import com.amrhal.discovermovieskt.view.main.fragments.SearchFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.tabs.TabLayout
 
 
 class MainActivity : AppCompatActivity() {
 
-    val mHomeFragment = HomeFragment.getInstance()
+//    val mHomeFragment = HomeFragment.getInstance()
     val mSearchFragment = SearchFragment.getInstance()
     val mFavFragment = FavFragment.getInstance()
 
@@ -29,12 +32,10 @@ class MainActivity : AppCompatActivity() {
     var bottomNavigationView: BottomNavigationViewEx? = null
 
 
-    private val mViewPager: ViewPager? = null
     var mTopNavigationTabStrip: NavigationTabStrip? = null
-
+    private var mHomeFragmentsPagerAdapter: HomeFragmentsPagerAdapter? = null
 
     var list: ArrayList<Movie.Result> = arrayListOf()
-    var adaptor: MoviesAdaptor? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,46 +56,29 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        mHomeFragmentsPagerAdapter = HomeFragmentsPagerAdapter(supportFragmentManager)
+
+        // Set up the ViewPager with the sections adapter.
+        view_pager_container.adapter = mHomeFragmentsPagerAdapter
+
+       // view_pager_container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
+
+       // tabs.addOnTabSelectedListener( TabLayout.ViewPagerOnTabSelectedListener(view_pager_container) )
+      //  mTopNavigationTabStrip?.setOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+      //      override fun onPageScrollStateChanged(state: Int) {
+      //         Log.e("tag","page onPageScrollStateChanged and state is :$state")
+      //      }}
+
+      //      )
+
+      //  mTopNavigationTabStrip?.setOnTabStripSelectedIndexListener(...)
+
     }
 
     private fun setupTabLayout() {
         mTopNavigationTabStrip = findViewById(R.id.nts_top)
         mTopNavigationTabStrip?.setTabIndex(0, true)
     }
-
-
-//    fun initUI() {
-//        mViewPager = (ViewPager) findViewById(R.id.vp);
-//        mTopNavigationTabStrip = (NavigationTabStrip) findViewById(R.id.nts_top);
-//
-//    }
-//
-//    fun setUI() {
-//        mViewPager.setAdapter( PagerAdapter() {
-//            @Override
-//            public int getCount() {
-//                return 3;
-//            }
-//
-//            @Override
-//            public boolean isViewFromObject(final View view, final Object object) {
-//                return view.equals(object);
-//            }
-//
-//            @Override
-//            public void destroyItem(final View container, final int position, final Object object) {
-//                ((ViewPager) container).removeView((View) object);
-//            }
-//
-//            @Override
-//            public Object instantiateItem(final ViewGroup container, final int position) {
-//                final View view = new View(getBaseContext());
-//                container.addView(view);
-//                return view;
-//            }}
-//        })
-//
-//        mTopNavigationTabStrip.setTabIndex(1, true)
 
 
     private fun setupBottomNav() {
@@ -107,10 +91,9 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView?.onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
 
-
             when (it.itemId) {
                 R.id.home_menu_item -> {
-                    setupFragment(mHomeFragment)
+                   // setupFragment(mHomeFragment)
                     mTopNavigationTabStrip?.visibility = View.VISIBLE
                     return@OnNavigationItemSelectedListener true
                 }
