@@ -3,13 +3,15 @@
     <color name="colorPrimary">#1d1d1d</color>
     <color name="colorPrimaryDark">#b6b6b6</color>
     <color name="colorAccent">#ffe14e</color>
+ <color name="colorAccent2">#fd731b</color>
 
     <!--bottom nav c-->
     <color name="tab_enable">#fd731b</color>
     <color name="tab_disable">#706c69</color>
 
-    <color name="white">#acacac</color>
-    <color name="off">#c1bfb5</color>
+    <color name="white">#ffff</color>
+    <color name="off_white">#b1b1b1</color>
+<color name="dark_white">#535353</color>
 
     <color name="gradiant_start">#2d2c24</color>
     <color name="gradiant_end">#3b3b58</color>

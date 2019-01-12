@@ -1,5 +1,6 @@
 package com.amrhal.discovermovieskt.view.main.fragments
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -15,29 +16,27 @@ import kotlinx.android.synthetic.main.frag_fav_movies.*
 import kotlinx.android.synthetic.main.frag_search.*
 
 
-class FavFragment : Fragment() {
+@SuppressLint("ValidFragment")
+object FavFragment : Fragment() {
 
 
-
-    companion object {
-
-        var favfragment:FavFragment? = null
-        fun getInstance():FavFragment{  //singleton pattern
-
-            if (favfragment == null) {
-                favfragment= FavFragment()
-
-                return favfragment as FavFragment
-            }
-            else
-                return favfragment as FavFragment
-        }
-
-        }
-
-
-
-    private val imageUrl = "https://images.pexels.com/photos/163065/mobile-phone-android-apps-phone-163065.jpeg"
+//
+//    companion object {
+//
+//        var favfragment:FavFragment? = null
+//        fun getInstance():FavFragment{  //singleton pattern
+//
+//            if (favfragment == null) {
+//                favfragment= FavFragment()
+//
+//                return favfragment as FavFragment
+//            }
+//            else
+//                return favfragment as FavFragment
+//        }
+//
+//        }
+//
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate( R.layout.frag_fav_movies,container,false )

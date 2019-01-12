@@ -1,22 +1,19 @@
 package com.amrhal.discovermovieskt.view.main
 
-import androidx.lifecycle.Observer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.amrhal.discovermovieskt.R
 import com.amrhal.discovermovieskt.data.model.Movie
 import kotlinx.android.synthetic.main.activity_main.*
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
-import com.gigamole.navigationtabstrip.NavigationTabStrip
-import androidx.viewpager.widget.ViewPager
+
 import com.amrhal.discovermovieskt.view.main.fragments.FavFragment
 import com.amrhal.discovermovieskt.view.main.fragments.HomeFragment
-import com.amrhal.discovermovieskt.view.main.fragments.HomeFragmentsPagerAdapter
+
 import com.amrhal.discovermovieskt.view.main.fragments.SearchFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayout
@@ -24,16 +21,16 @@ import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
 
-//    val mHomeFragment = HomeFragment.getInstance()
-    val mSearchFragment = SearchFragment.getInstance()
-    val mFavFragment = FavFragment.getInstance()
+    //    val mHomeFragment = HomeFragment.getInstance()
+    //  val mSearchFragment = SearchFragment()
+    // val mFavFragment = FavFragment.getInstance()
 
 
     var bottomNavigationView: BottomNavigationViewEx? = null
 
 
-    var mTopNavigationTabStrip: NavigationTabStrip? = null
-    private var mHomeFragmentsPagerAdapter: HomeFragmentsPagerAdapter? = null
+    // var mTopNavigationTabStrip: NavigationTabStrip? = null
+    private var mHomeFragmentsPagerAdapter: FragmentsPagerAdapter? = null
 
     var list: ArrayList<Movie.Result> = arrayListOf()
 
@@ -44,41 +41,29 @@ class MainActivity : AppCompatActivity() {
 
         setupBottomNav()
 
-        setupTabLayout()
-
-
+        // setupTabLayout()
         // recyclerviewSetup()
+        // observeFromViewModel()
 
-       // observeFromViewModel()
-        button.setOnClickListener {
-
-            bottomNavigationView?.visibility = View.GONE
-        }
-
-
-        mHomeFragmentsPagerAdapter = HomeFragmentsPagerAdapter(supportFragmentManager)
+        mHomeFragmentsPagerAdapter = FragmentsPagerAdapter.getInstance(supportFragmentManager)
 
         // Set up the ViewPager with the sections adapter.
         view_pager_container.adapter = mHomeFragmentsPagerAdapter
 
-       // view_pager_container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
+        view_pager_container.offscreenPageLimit = 1
 
-       // tabs.addOnTabSelectedListener( TabLayout.ViewPagerOnTabSelectedListener(view_pager_container) )
-      //  mTopNavigationTabStrip?.setOnPageChangeListener(object : ViewPager.OnPageChangeListener{
-      //      override fun onPageScrollStateChanged(state: Int) {
-      //         Log.e("tag","page onPageScrollStateChanged and state is :$state")
-      //      }}
 
-      //      )
+        view_pager_container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
 
-      //  mTopNavigationTabStrip?.setOnTabStripSelectedIndexListener(...)
+        tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(view_pager_container))
+
 
     }
 
-    private fun setupTabLayout() {
-        mTopNavigationTabStrip = findViewById(R.id.nts_top)
-        mTopNavigationTabStrip?.setTabIndex(0, true)
-    }
+//    private fun setupTabLayout() {
+//        mTopNavigationTabStrip = findViewById(R.id.nts_top)
+//        mTopNavigationTabStrip?.setTabIndex(0, true)
+//    }
 
 
     private fun setupBottomNav() {
@@ -93,18 +78,22 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.home_menu_item -> {
-                   // setupFragment(mHomeFragment)
-                    mTopNavigationTabStrip?.visibility = View.VISIBLE
+                    // setupFragment(mHomeFragment)
+                    tabs.visibility = View.VISIBLE
+                    view_pager_container.visibility = View.VISIBLE
+                    removeFragment()
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.search_menu_item -> {
-                    setupFragment(mSearchFragment)
-                    mTopNavigationTabStrip?.visibility = View.GONE
+                    replaceFragment(SearchFragment, FavFragment)
+                    tabs.visibility = View.GONE
+                    view_pager_container.visibility = View.GONE
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.fev_movies_menu_item -> {
-                    setupFragment(mFavFragment)
-                    mTopNavigationTabStrip?.visibility = View.GONE
+                    replaceFragment(FavFragment, SearchFragment)
+                    tabs.visibility = View.GONE
+                    view_pager_container.visibility = View.GONE
                     return@OnNavigationItemSelectedListener true
                 }
 
@@ -117,17 +106,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun recyclerviewSetup() {
+    private fun removeFragment() {
+        supportFragmentManager.beginTransaction().remove(SearchFragment)
+        supportFragmentManager.beginTransaction().remove(FavFragment)
 
-//       // list = dummyList()
-//        recyclerviewID.layoutManager = GridLayoutManager(applicationContext, 2)
-//
-//        adaptor = MoviesAdaptor(list, this) {
-//            Toast.makeText(this, "${it.title} Clicked", Toast.LENGTH_SHORT).show()
-//        }
-//       // adaptor?.updateMoviesList(list)
-//        recyclerviewID.adapter = adaptor
-//        Toast.makeText(this, "list = ${list.size}", Toast.LENGTH_SHORT).show()
     }
 
     private fun dummyList(): ArrayList<Movie.Result> {
@@ -158,24 +140,47 @@ class MainActivity : AppCompatActivity() {
         return listf
     }
 
-//    private fun observeFromViewModel() {
-//
-//        val model = ViewModelProviders.of(this).get(mainActivityViewModel::class.java)
-//
-//        model.getTopMovies().observe(this, Observer<Movie> { result ->
-//            Toast.makeText(this, "Movie Delivered", Toast.LENGTH_SHORT).show()
-//            list = result.results as ArrayList<Movie.Result>
-//            adaptor?.updateMoviesList(list)
-//
-//        })
-//    }
+
+    private fun replaceFragment(fromFragment: Fragment, toFragment: Fragment) { //using polymorphism
+
+        supportFragmentManager.beginTransaction().remove(fromFragment).commit()
+        if (!toFragment.isAdded){
+            supportFragmentManager.beginTransaction().add(R.id.frame_layout, toFragment).commit()
+        }
+
+    }
 
 
-    private fun setupFragment(fragment: Fragment) { //using polymorphism
+    class FragmentsPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frame_layout, fragment)
-        fragmentTransaction.commit()
+        companion object {
+
+            var homeFragmentsPagerAdapter: FragmentsPagerAdapter? = null
+            fun getInstance(supportFragmentManager: FragmentManager): FragmentsPagerAdapter? {  //singleton pattern
+
+                if (homeFragmentsPagerAdapter == null) {
+                    homeFragmentsPagerAdapter = FragmentsPagerAdapter(supportFragmentManager)
+
+                    return homeFragmentsPagerAdapter
+                } else
+                    return homeFragmentsPagerAdapter
+            }
+
+        }
+
+
+        override fun getItem(position: Int): Fragment {
+
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+
+            return HomeFragment.newInstance(position + 1)
+        }
+
+        override fun getCount(): Int {
+            // Show 3 total pages.
+            return 4
+        }
     }
 
 }
