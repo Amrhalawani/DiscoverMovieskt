@@ -51,13 +51,14 @@ class MoviesAdaptor(var moviesList: List<Movie.Result>,
         Log.e("tag","List getItemCount() = ${moviesList.size}")
         return moviesList.size
     }
+
 }
 
 class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
     fun bind(movieitem: Movie.Result, listener: (Movie.Result) -> Unit) = with(itemView) {
-        itemView.movieposterIV_ID.loadUrlGlide(movieitem.posterPath)
+        itemView.movieposterIV_ID.loadUrlPicasso(movieitem.posterPath)
         //itemView.testText.text = movieitem.title
         setOnClickListener { listener(movieitem) }
 
@@ -67,14 +68,12 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     //extension Fun
     private fun ImageView.loadUrlPicasso(url: String) {
         Picasso.get().load("https://image.tmdb.org/t/p/w185$url").into(this)
-      //  Picasso.get().load(url).into(this)
-
         Log.e("tag","https://image.tmdb.org/t/p/w185$url")
     }
 
     //extension Fun
     private fun ImageView.loadUrlGlide(url: String) {
-
+//Todo have a look here and fix memory leak, its consume 180mb more than picasso for 80 pic.
 
         GlideApp.with(context).asBitmap()
             .load(Uri.parse("https://image.tmdb.org/t/p/w185$url"))

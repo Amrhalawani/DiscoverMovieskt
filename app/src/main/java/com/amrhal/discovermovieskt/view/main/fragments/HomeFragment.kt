@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
         recyclerviewID.layoutManager = GridLayoutManager(activity, 2)
 
         adaptor = MoviesAdaptor(list as List<Movie.Result>, this.activity!!) {
-            Toast.makeText(activity, "${it.title} Clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity?.applicationContext, "${it.title} Clicked", Toast.LENGTH_SHORT).show()
         }
         // adaptor?.updateMoviesList(list)
         recyclerviewID.adapter = adaptor

@@ -21,15 +21,8 @@ import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
 
-    //    val mHomeFragment = HomeFragment.getInstance()
-    //  val mSearchFragment = SearchFragment()
-    // val mFavFragment = FavFragment.getInstance()
-
-
     var bottomNavigationView: BottomNavigationViewEx? = null
 
-
-    // var mTopNavigationTabStrip: NavigationTabStrip? = null
     private var mHomeFragmentsPagerAdapter: FragmentsPagerAdapter? = null
 
     var list: ArrayList<Movie.Result> = arrayListOf()
@@ -41,16 +34,12 @@ class MainActivity : AppCompatActivity() {
 
         setupBottomNav()
 
-        // setupTabLayout()
-        // recyclerviewSetup()
-        // observeFromViewModel()
-
         mHomeFragmentsPagerAdapter = FragmentsPagerAdapter.getInstance(supportFragmentManager)
 
         // Set up the ViewPager with the sections adapter.
         view_pager_container.adapter = mHomeFragmentsPagerAdapter
 
-        view_pager_container.offscreenPageLimit = 1
+        view_pager_container.offscreenPageLimit = 4
 
 
         view_pager_container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
@@ -59,11 +48,6 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
-//    private fun setupTabLayout() {
-//        mTopNavigationTabStrip = findViewById(R.id.nts_top)
-//        mTopNavigationTabStrip?.setTabIndex(0, true)
-//    }
 
 
     private fun setupBottomNav() {
@@ -109,7 +93,9 @@ class MainActivity : AppCompatActivity() {
     private fun removeFragment() {
         supportFragmentManager.beginTransaction().remove(SearchFragment)
         supportFragmentManager.beginTransaction().remove(FavFragment)
-
+      //  for (fragment in supportFragmentManager.fragments) {
+       //     supportFragmentManager.beginTransaction().remove(fragment).commit()
+        //}
     }
 
     private fun dummyList(): ArrayList<Movie.Result> {

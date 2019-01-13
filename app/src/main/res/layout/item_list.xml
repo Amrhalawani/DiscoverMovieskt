@@ -15,6 +15,7 @@
     android:clickable="true"
     android:focusable="true"
     android:scaleType="fitCenter"
+    android:layout_margin="3dp"
     />
 
 
