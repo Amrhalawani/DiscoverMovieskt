@@ -8,6 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
     <style name="mytheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -29,4 +36,15 @@
     <style name="MineCustomTabText" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">10sp</item>
     </style>
+    <style name="EditTextStyle">
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:padding">10dp</item>
+        <!--<item name="android:background">@drawable/background_edit_text</item>-->
+        <item name="android:textColor">#f2f2f2</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColorHint">#373737</item>
+        <item name="android:layout_marginStart">52dp</item>
+        <item name="android:layout_marginEnd">52dp</item>
+    </style>
+
 </resources>

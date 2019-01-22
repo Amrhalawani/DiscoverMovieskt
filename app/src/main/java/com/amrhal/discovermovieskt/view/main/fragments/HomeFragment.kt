@@ -1,5 +1,6 @@
 package com.amrhal.discovermovieskt.view.main.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.amrhal.discovermovieskt.R
 import com.amrhal.discovermovieskt.data.model.Movie
+import com.amrhal.discovermovieskt.view.details.DetailsActivity
 import com.amrhal.discovermovieskt.view.main.MoviesAdaptor
 import com.amrhal.discovermovieskt.view.main.mainActivityViewModel
 import kotlinx.android.synthetic.main.frag_home.*
@@ -19,36 +21,27 @@ import kotlinx.android.synthetic.main.frag_home.view.*
 class HomeFragment : Fragment() {
     var list: ArrayList<Movie.Result> = arrayListOf()
     var adaptor: MoviesAdaptor? = null
-        override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-        ): View? {
-            val rootView = inflater.inflate(R.layout.frag_home, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val rootView = inflater.inflate(R.layout.frag_home, container, false)
 
-            rootView.texthomefrag.text = getString(R.string.section_format, arguments?.getInt(ARG_SECTION_NUMBER))
+       return rootView
+    }
 
-            return rootView
+    companion object {
+
+        private val ARG_SECTION_NUMBER = "section_number"
+
+        fun newInstance(sectionNumber: Int): HomeFragment {
+            val fragment = HomeFragment()
+            val args = Bundle()
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber)
+            fragment.arguments = args
+            return fragment
         }
-
-        companion object {
-            /**
-             * The fragment argument representing the section number for this
-             * fragment.
-             */
-            private val ARG_SECTION_NUMBER = "section_number"
-
-            /**
-             * Returns a new instance of this fragment for the given section
-             * number.
-             */
-            fun newInstance(sectionNumber: Int): HomeFragment {
-                val fragment = HomeFragment()
-                val args = Bundle()
-                args.putInt(ARG_SECTION_NUMBER, sectionNumber)
-                fragment.arguments = args
-                return fragment
-            }
-        }
+    }
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -59,6 +52,7 @@ class HomeFragment : Fragment() {
 
 
     }
+
     private fun recyclerViewSetup() {
 
         // list = dummyList()
@@ -66,10 +60,16 @@ class HomeFragment : Fragment() {
 
         adaptor = MoviesAdaptor(list as List<Movie.Result>, this.activity!!) {
             Toast.makeText(activity?.applicationContext, "${it.title} Clicked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(activity?.applicationContext, DetailsActivity::class.java)
+            //Todo change this implementation to parcelable later...
+
+            intent.putExtra("movieo", it)
+            startActivity(intent)
         }
+
         // adaptor?.updateMoviesList(list)
         recyclerviewID.adapter = adaptor
-        Toast.makeText(activity, "list = ${list.size}", Toast.LENGTH_SHORT).show()
+        //  Toast.makeText(activity, "list = ${list.size}", Toast.LENGTH_SHORT).show()
     }
 
 
@@ -80,26 +80,27 @@ class HomeFragment : Fragment() {
             1 -> model.getPopulerMovies().observe(this, Observer<Movie> { result ->
                 list = result.results as ArrayList<Movie.Result>
                 adaptor?.updateMoviesList(list)
+                prograss_homefragment.visibility = View.GONE
 
             })
 
             2 -> model.getTopMovies().observe(this, Observer<Movie> { result ->
                 list = result.results as ArrayList<Movie.Result>
                 adaptor?.updateMoviesList(list)
-
+                prograss_homefragment.visibility = View.GONE
             })
-
 
 
             3 -> model.getNowPlayingMovies().observe(this, Observer<Movie> { result ->
                 list = result.results as ArrayList<Movie.Result>
                 adaptor?.updateMoviesList(list)
-
+                prograss_homefragment.visibility = View.GONE
             })
 
             4 -> model.getUpComingMovies().observe(this, Observer<Movie> { result ->
                 list = result.results as ArrayList<Movie.Result>
                 adaptor?.updateMoviesList(list)
+                prograss_homefragment.visibility = View.GONE
 
             })
 
@@ -107,4 +108,4 @@ class HomeFragment : Fragment() {
         }
 
     }
-    }
+}

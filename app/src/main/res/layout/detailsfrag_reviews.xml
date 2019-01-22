@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fragment_background"
-    tools:context="amrhal.example.com.discovermovies2.DetailsFragments.ReviewsFragment"
-    android:id="@+id/frame_layout_reviewsfragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/recyclerviewRecviewID"/>
+    android:id="@+id/frame_layout_reviewsfragment">
+    <!--tools:context="amrhal.example.com.discovermovies2.DetailsFragments.ReviewsFragment"-->
+    <!--<androidx.recyclerview.widget.RecyclerView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/recyclerviewRecviewID"/>-->
 
 </FrameLayout>

@@ -14,10 +14,10 @@ interface MoviesApi {
     @GET("trending/movie/week")
     fun getTrendingMovies(@Query("api_key") apiKey: String): Call<ResponseBody>
 
-   @GET("movie/now_playing")
+    @GET("movie/now_playing")
     fun getNowPlayingMovies(@Query("api_key") apiKey: String): Call<ResponseBody>
 
-   @GET("movie/upcoming")
+    @GET("movie/upcoming")
     fun getUpComingMovies(@Query("api_key") apiKey: String): Call<ResponseBody>
 
     @GET("movie/top_rated")
@@ -29,6 +29,14 @@ interface MoviesApi {
 
     @GET("movie/{id}/reviews")
     fun getMovieReviews(@Path("id") id: String, @Query("api_key") apiKey: String): Call<ResponseBody>
+
+
+    @GET("movie/{id}/credits")
+    fun getMovieCast(@Path("id") id: String, @Query("api_key") apiKey: String): Call<ResponseBody>
+
+
+    @GET("movie/{id}/videos")
+    fun getMovieTrailers(@Path("id") id: String, @Query("api_key") apiKey: String): Call<ResponseBody>
 
 }
 

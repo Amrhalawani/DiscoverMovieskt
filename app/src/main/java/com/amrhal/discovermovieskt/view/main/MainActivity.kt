@@ -62,20 +62,19 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.home_menu_item -> {
-                    // setupFragment(mHomeFragment)
                     tabs.visibility = View.VISIBLE
                     view_pager_container.visibility = View.VISIBLE
                     removeFragment()
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.search_menu_item -> {
-                    replaceFragment(SearchFragment, FavFragment)
+                    replaceFragment(FavFragment, SearchFragment)
                     tabs.visibility = View.GONE
                     view_pager_container.visibility = View.GONE
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.fev_movies_menu_item -> {
-                    replaceFragment(FavFragment, SearchFragment)
+                    replaceFragment(SearchFragment, FavFragment)
                     tabs.visibility = View.GONE
                     view_pager_container.visibility = View.GONE
                     return@OnNavigationItemSelectedListener true
@@ -93,8 +92,8 @@ class MainActivity : AppCompatActivity() {
     private fun removeFragment() {
         supportFragmentManager.beginTransaction().remove(SearchFragment)
         supportFragmentManager.beginTransaction().remove(FavFragment)
-      //  for (fragment in supportFragmentManager.fragments) {
-       //     supportFragmentManager.beginTransaction().remove(fragment).commit()
+        //  for (fragment in supportFragmentManager.fragments) { its works well but it will remove the viewpager fragments too
+        //     supportFragmentManager.beginTransaction().remove(fragment).commit()
         //}
     }
 
@@ -125,12 +124,10 @@ class MainActivity : AppCompatActivity() {
         }
         return listf
     }
-
-
     private fun replaceFragment(fromFragment: Fragment, toFragment: Fragment) { //using polymorphism
 
         supportFragmentManager.beginTransaction().remove(fromFragment).commit()
-        if (!toFragment.isAdded){
+        if (!toFragment.isAdded) {
             supportFragmentManager.beginTransaction().add(R.id.frame_layout, toFragment).commit()
         }
 

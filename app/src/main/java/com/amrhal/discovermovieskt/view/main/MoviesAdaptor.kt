@@ -47,7 +47,6 @@ class MoviesAdaptor(var moviesList: List<Movie.Result>,
 
     // Gets the number of animals in the list
     override fun getItemCount(): Int {
-
         Log.e("tag","List getItemCount() = ${moviesList.size}")
         return moviesList.size
     }
@@ -59,6 +58,10 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(movieitem: Movie.Result, listener: (Movie.Result) -> Unit) = with(itemView) {
         itemView.movieposterIV_ID.loadUrlPicasso(movieitem.posterPath)
+        itemView.movie_name.text = movieitem.title
+        itemView.movie_rate.text = "★ " + movieitem.voteAverage.toString()
+        itemView.release_date.text = if (movieitem.releaseDate?.substring(0,4) == "2019") movieitem.releaseDate else movieitem.releaseDate?.substring(0,4)
+
         //itemView.testText.text = movieitem.title
         setOnClickListener { listener(movieitem) }
 
@@ -77,14 +80,7 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         GlideApp.with(context).asBitmap()
             .load(Uri.parse("https://image.tmdb.org/t/p/w185$url"))
-            .into(object: BitmapImageViewTarget(this){
-                override fun onResourceReady( // when the is ready
-                    resource: Bitmap,
-                    transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?
-                ) {
-                    super.onResourceReady(resource, transition)
-                }
-            })
+            .into(this)
         Log.e("tag","https://image.tmdb.org/t/p/w185$url")
     }
 

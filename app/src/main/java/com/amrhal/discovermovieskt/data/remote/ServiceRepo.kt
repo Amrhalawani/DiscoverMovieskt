@@ -4,7 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.amrhal.discovermovieskt.BuildConfig
+import com.amrhal.discovermovieskt.data.model.Actor
 import com.amrhal.discovermovieskt.data.model.Movie
+import com.amrhal.discovermovieskt.data.model.Trailer
 import com.google.gson.Gson
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -24,12 +26,10 @@ object ServiceRepo {
         retrofit?.getTopRatedMovies(BuildConfig.API_KEY)?.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 val MResponse:String? = response.body()?.string()
-
                 val gson = Gson()
                 val movie = gson.fromJson(MResponse, Movie::class.java)
                 data.value = movie
             }
-
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("tag","onFailure throw : ${t.localizedMessage}")
             }
@@ -96,6 +96,40 @@ object ServiceRepo {
                 val gson = Gson()
                 val movie = gson.fromJson(MResponse, Movie::class.java)
                 data.value = movie
+            }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.e("tag","onFailure throw : ${t.localizedMessage}")
+            }
+        })
+        return data
+    }
+
+    fun getMovieCast(id:String): LiveData<Actor> {
+        val data =  MutableLiveData<Actor>()
+        retrofit?.getMovieCast(id,BuildConfig.API_KEY)?.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                val MResponse:String? = response.body()?.string()
+                val gson = Gson()
+                val cast = gson.fromJson(MResponse, Actor::class.java)
+                data.value = cast
+
+                Log.e("tag","")
+            }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.e("tag","onFailure throw : ${t.localizedMessage}")
+            }
+        })
+        return data
+    }
+
+    fun getMovieTrailer(id:String): LiveData<Trailer> {
+        val data =  MutableLiveData<Trailer>()
+        retrofit?.getMovieTrailers(id,BuildConfig.API_KEY)?.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                val MResponse:String? = response.body()?.string()
+                val gson = Gson()
+                val trailer = gson.fromJson(MResponse, Trailer::class.java)
+                data.value = trailer
             }
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("tag","onFailure throw : ${t.localizedMessage}")
