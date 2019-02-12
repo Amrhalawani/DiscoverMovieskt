@@ -3,11 +3,23 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary"
         tools:context=".view.main.MainActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_main_activity"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:logo="@drawable/movielix_text_logo1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:elevation="4dp"
+          />
 
     <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
             android:id="@+id/main_bottom_navigation"
@@ -43,12 +55,12 @@
             app:tabTextColor="@color/dark_white"
             app:tabSelectedTextColor="#ffffff"
             android:background="@color/colorPrimary"
-
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_main_activity"
 
-    >
+            app:layout_constraintHorizontal_bias="0.0"
+            >
 
         <com.google.android.material.tabs.TabItem
                 android:id="@+id/tabItem"

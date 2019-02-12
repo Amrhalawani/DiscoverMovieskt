@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setupBottomNav()
-
+        actionberSetup()
         mHomeFragmentsPagerAdapter = FragmentsPagerAdapter.getInstance(supportFragmentManager)
 
         // Set up the ViewPager with the sections adapter.
@@ -45,6 +45,11 @@ class MainActivity : AppCompatActivity() {
         view_pager_container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
 
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(view_pager_container))
+
+
+    }
+
+    private fun actionberSetup() {
 
 
     }
@@ -124,6 +129,7 @@ class MainActivity : AppCompatActivity() {
         }
         return listf
     }
+
     private fun replaceFragment(fromFragment: Fragment, toFragment: Fragment) { //using polymorphism
 
         supportFragmentManager.beginTransaction().remove(fromFragment).commit()

@@ -28,8 +28,10 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
-        val id: String = intent.extras.get("id").toString()
-        setupUI()
+        val selectedMovie = intent.getParcelableExtra<Movie.Result>("movieo")
+        val id: String = selectedMovie.id.toString()
+
+        setupUI(selectedMovie)
 
         TrailerRecyclerViewSetup()
         getTrailers(id)
@@ -39,8 +41,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun setupUI() {
-        val selectedMovie = intent.getParcelableExtra<Movie.Result>("movieo")
+    private fun setupUI(selectedMovie: Movie.Result) {
         Picasso.get().load("https://image.tmdb.org/t/p/w185${selectedMovie.posterPath}").into(poster_detail)
         avarege.text = selectedMovie.voteAverage.toString()
         titley.text = selectedMovie.title

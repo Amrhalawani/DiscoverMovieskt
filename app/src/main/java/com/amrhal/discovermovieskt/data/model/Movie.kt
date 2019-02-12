@@ -16,7 +16,7 @@ data class Movie(
 
     @SerializedName("total_results")
     val totalResults: Int?
-) :Parcelable{
+) : Parcelable {
 
 
     constructor(parcel: Parcel) : this(
@@ -56,7 +56,7 @@ data class Movie(
         val voteAverage: Double?,
         @SerializedName("vote_count")
         val voteCount: Int?
-    ):Parcelable {
+    ) : Parcelable {
         constructor(parcel: Parcel) : this(
             parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
             parcel.readString(),
