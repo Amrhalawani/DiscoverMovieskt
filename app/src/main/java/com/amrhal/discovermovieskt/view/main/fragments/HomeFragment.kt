@@ -15,7 +15,7 @@ import com.amrhal.discovermovieskt.R
 import com.amrhal.discovermovieskt.data.model.Movie
 import com.amrhal.discovermovieskt.view.details.DetailsActivity
 import com.amrhal.discovermovieskt.view.main.MoviesAdaptor
-import com.amrhal.discovermovieskt.view.main.mainActivityViewModel
+import com.amrhal.discovermovieskt.view.main.MainActivityViewModel
 import kotlinx.android.synthetic.main.frag_home.*
 
 class HomeFragment : Fragment() {
@@ -75,7 +75,7 @@ class HomeFragment : Fragment() {
 
     private fun observeFromViewModel() {
 
-        val model = ViewModelProviders.of(this).get(mainActivityViewModel::class.java)
+        val model = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
         when (arguments?.get(HomeFragment.ARG_SECTION_NUMBER)) {
             1 -> model.getPopulerMovies().observe(this, Observer<Movie> { result ->
                 list = result.results as ArrayList<Movie.Result>

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.amrhal.discovermovieskt.BuildConfig
 import com.amrhal.discovermovieskt.data.model.Actor
 import com.amrhal.discovermovieskt.data.model.Movie
+import com.amrhal.discovermovieskt.data.model.SearchedMovie
 import com.amrhal.discovermovieskt.data.model.Trailer
 import com.google.gson.Gson
 import okhttp3.ResponseBody
@@ -138,14 +139,14 @@ object ServiceRepo {
         return data
     }
 
-    fun getSearchedMovies(id:String): LiveData<Trailer> {
-        val data =  MutableLiveData<Trailer>()
-        retrofit?.searchMovie(BuildConfig.API_KEY,"sad",false)?.enqueue(object : Callback<ResponseBody> {
+    fun getSearchedMovies (query:String) : LiveData<Movie> {
+        val data =  MutableLiveData<Movie>()
+        retrofit?.searchMovie(BuildConfig.API_KEY,query,"1",false)?.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 val MResponse:String? = response.body()?.string()
                 val gson = Gson()
-                val trailer = gson.fromJson(MResponse, Trailer::class.java)
-                data.value = trailer
+                val searchedMovie = gson.fromJson(MResponse, Movie::class.java)
+                data.value = searchedMovie
             }
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("tag","onFailure throw : ${t.localizedMessage}")
