@@ -52,8 +52,8 @@ class TrailerAdaptor(var trailersList: List<Trailer.Result>,
 class TrailerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(movieTitem: Trailer.Result, listener: (Trailer.Result) -> Unit) = with(itemView) {
-        val asa:String =  thumbnailURL(movieTitem.key.toString())
-        itemView.video_thumbnial.loadUrlPicasso(asa)
+        val url:String =  thumbnailURL(movieTitem.key.toString())
+        itemView.video_thumbnial.loadUrlPicasso(url)
         itemView.video_nameID.text = movieTitem.name
         //itemView.testText.text = movieitem.title
         setOnClickListener { listener(movieTitem) }
@@ -63,15 +63,15 @@ class TrailerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     //extension Fun
     private fun ImageView.loadUrlPicasso(url: String) {
-        Picasso.get().load("https://image.tmdb.org/t/p/w185$url").into(this)
-        Log.e("tag", "https://image.tmdb.org/t/p/w185$url")
+        Picasso.get().load(url).into(this)
+        Log.e("tag", "$url")
     }
 
     private fun thumbnailURL(ourkey: String): String {
 
         val YoutubeThumbnailbase = "https://img.youtube.com/vi/"
         val endurl = "/mqdefault.jpg"
-Log.e("Tag","$YoutubeThumbnailbase + $ourkey + $endurl")
+        Log.e("Tag","$YoutubeThumbnailbase + $ourkey + $endurl")
         return YoutubeThumbnailbase + ourkey + endurl
     }
 

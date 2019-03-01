@@ -82,7 +82,7 @@ class DetailsActivity : AppCompatActivity() {
 
         }
 
-        recyclerview_cast.adapter = adaptortrailer
+        recyclerview_trailer.adapter = adaptortrailer
         Toast.makeText(applicationContext, "list = ${list.size}", Toast.LENGTH_SHORT).show()
 
     }
@@ -94,7 +94,6 @@ class DetailsActivity : AppCompatActivity() {
             adaptortrailer?.updateMoviesList(listTrailer)
 
             Toast.makeText(this, "${listTrailer.size}", Toast.LENGTH_SHORT).show()
-            adaptortrailer?.updateMoviesList(listTrailer)
         })
 
     }
