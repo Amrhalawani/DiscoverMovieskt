@@ -38,5 +38,10 @@ interface MoviesApi {
     @GET("movie/{id}/videos")
     fun getMovieTrailers(@Path("id") id: String, @Query("api_key") apiKey: String): Call<ResponseBody>
 
+    // https://api.themoviedb.org/3/search/movie?api_key=7dc3c3d78e52290fbaaca09a7fb34436&language=en-US&query=mo&page=1&include_adult=false
+
+    @GET("search/movie")
+    fun searchMovie(@Query("api_key") apiKey: String, @Query("query") query: String, @Query("include_adult") includeAdult: Boolean): Call<ResponseBody>
+
 }
 

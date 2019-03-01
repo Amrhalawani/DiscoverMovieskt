@@ -137,4 +137,20 @@ object ServiceRepo {
         })
         return data
     }
+
+    fun getSearchedMovies(id:String): LiveData<Trailer> {
+        val data =  MutableLiveData<Trailer>()
+        retrofit?.searchMovie(BuildConfig.API_KEY,"sad",false)?.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                val MResponse:String? = response.body()?.string()
+                val gson = Gson()
+                val trailer = gson.fromJson(MResponse, Trailer::class.java)
+                data.value = trailer
+            }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.e("tag","onFailure throw : ${t.localizedMessage}")
+            }
+        })
+        return data
+    }
 }
