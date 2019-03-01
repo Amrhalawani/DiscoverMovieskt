@@ -28,14 +28,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="24dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/poster_detail"
-                >
+                app:layout_constraintTop_toTopOf="parent">
 
 
             <TextView
@@ -111,7 +111,7 @@
 
         <TextView
                 android:id="@+id/original_titleID"
-                android:layout_width="368dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/actor"
                 android:text="@string/lorem_ipsem_title_en"
