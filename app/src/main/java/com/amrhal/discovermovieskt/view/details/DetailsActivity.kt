@@ -13,6 +13,7 @@ import com.amrhal.discovermovieskt.R
 import com.amrhal.discovermovieskt.data.model.Actor
 import com.amrhal.discovermovieskt.data.model.Movie
 import com.amrhal.discovermovieskt.data.model.Trailer
+import com.amrhal.discovermovieskt.util.Util
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_content_details.*
 import kotlinx.android.synthetic.main.activity_details.*
@@ -48,7 +49,7 @@ class DetailsActivity : AppCompatActivity() {
         releasedate.text = selectedMovie.releaseDate.toString()
         over_mentID.text = selectedMovie.overview.toString()
         original_titleID.text = "${selectedMovie.originalTitle.toString()} (${selectedMovie.originalLanguage})"
-        Picasso.get().load("https://image.tmdb.org/t/p/w500${selectedMovie.backdropPath}").into( backImagecollapsedID )
+        Picasso.get().load("https://image.tmdb.org/t/p/w500${selectedMovie.backdropPath}").into(backImagecollapsedID)
     }
 
     private fun castRecyclerViewSetup() {
@@ -77,8 +78,8 @@ class DetailsActivity : AppCompatActivity() {
         recyclerview_trailer.layoutManager = GridLayoutManager(this, 2)
 
         adaptortrailer = TrailerAdaptor(listTrailer as List<Trailer.Result>, this) {
-            Toast.makeText(applicationContext, "${it.name} Clicked", Toast.LENGTH_SHORT).show()
-
+            //  Toast.makeText(applicationContext, "${it.name} Clicked", Toast.LENGTH_SHORT).show()
+            Util.watchYoutubeVideo(this, it.key)
 
         }
 

@@ -7,14 +7,11 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fav Fragment"
-            android:textSize="60sp"/>
-
-    <ProgressBar
-            android:id="@+id/progressBar3"
+            android:text="Under Construction..."
+            android:fontFamily="@font/coustard"
+            android:textColor="@color/colorAccent"
             android:layout_gravity="center"
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:textSize="22sp"/>
+
 
 </FrameLayout>
