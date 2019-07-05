@@ -15,6 +15,7 @@
             android:layout_height="?attr/actionBarSize"
             app:logo="@drawable/movielix_text_logo1"
             app:layout_constraintTop_toTopOf="parent"
+
             app:layout_constraintStart_toStartOf="parent"
             android:background="@color/colorPrimaryDark"
             android:padding="5dp"
@@ -114,7 +115,7 @@
                 android:id="@+id/emptyViewID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="unable to connect to internet"
+                android:text="@string/unable_to_connect_to_internet"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button"
                 android:textColor="@color/colorAccent"
                 android:visibility="visible"

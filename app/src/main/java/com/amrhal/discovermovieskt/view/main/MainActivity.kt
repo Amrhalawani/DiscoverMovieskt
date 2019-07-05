@@ -13,6 +13,7 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
 
 import com.amrhal.discovermovieskt.view.main.fragments.FavFragment
 import com.amrhal.discovermovieskt.view.main.fragments.HomeFragment
+import com.amrhal.discovermovieskt.view.main.fragments.InfoFragment
 
 import com.amrhal.discovermovieskt.view.main.fragments.SearchFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -22,9 +23,7 @@ import com.google.android.material.tabs.TabLayout
 class MainActivity : AppCompatActivity() {
 
     var bottomNavigationView: BottomNavigationViewEx? = null
-
     private var mHomeFragmentsPagerAdapter: FragmentsPagerAdapter? = null
-
     var list: ArrayList<Movie.Result> = arrayListOf()
 
 
@@ -84,6 +83,12 @@ class MainActivity : AppCompatActivity() {
                     view_pager_container.visibility = View.GONE
                     return@OnNavigationItemSelectedListener true
                 }
+                R.id.info_item -> {
+                    replaceFragment(SearchFragment, InfoFragment)
+                    tabs.visibility = View.GONE
+                    view_pager_container.visibility = View.GONE
+                    return@OnNavigationItemSelectedListener true
+                }
 
 
             }
@@ -102,34 +107,6 @@ class MainActivity : AppCompatActivity() {
         //}
     }
 
-    private fun dummyList(): ArrayList<Movie.Result> {
-        val listid = List<Int>(2) { 5 }
-
-
-        val listf = arrayListOf<Movie.Result>()
-        for (i in 1..5) {
-            listf.add(
-                Movie.Result(
-                    false,
-                    "a",
-                    listid,
-                    i,
-                    "a",
-                    "a",
-                    "a",
-                    1.1,
-                    "https://appledentures.ca/wp-content/uploads/2015/11/person1.jpg",
-                    "a",
-                    "title $i",
-                    false,
-                    0.05,
-                    2
-                )
-            )
-        }
-        return listf
-    }
-
     private fun replaceFragment(fromFragment: Fragment, toFragment: Fragment) { //using polymorphism
 
         supportFragmentManager.beginTransaction().remove(fromFragment).commit()
@@ -140,7 +117,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    class FragmentsPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+    class FragmentsPagerAdapter (fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
         companion object {
 
@@ -159,15 +136,10 @@ class MainActivity : AppCompatActivity() {
 
 
         override fun getItem(position: Int): Fragment {
-
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-
             return HomeFragment.newInstance(position + 1)
         }
 
         override fun getCount(): Int {
-            // Show 3 total pages.
             return 4
         }
     }

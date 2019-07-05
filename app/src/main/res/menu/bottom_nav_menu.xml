@@ -4,19 +4,25 @@
     <item
         android:id="@+id/home_menu_item"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="Home"
+        android:title="@string/home"
     />
 
     <item
         android:id="@+id/search_menu_item"
         android:icon="@drawable/ic_search_black_24dp"
-        android:title="Search"
+        android:title="@string/search"
 
         />
     <item
         android:id="@+id/fev_movies_menu_item"
         android:icon="@drawable/ic_favorite_black_24dp"
         android:title="@string/Fav_movies"
+
+        />
+    <item
+        android:id="@+id/info_item"
+        android:icon="@drawable/ic_info_black_24dp"
+        android:title="@string/info"
 
         />
 

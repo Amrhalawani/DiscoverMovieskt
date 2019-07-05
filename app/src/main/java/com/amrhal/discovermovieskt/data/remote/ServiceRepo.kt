@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import com.amrhal.discovermovieskt.BuildConfig
 import com.amrhal.discovermovieskt.data.model.Actor
 import com.amrhal.discovermovieskt.data.model.Movie
-import com.amrhal.discovermovieskt.data.model.SearchedMovie
 import com.amrhal.discovermovieskt.data.model.Trailer
 import com.google.gson.Gson
 import okhttp3.ResponseBody

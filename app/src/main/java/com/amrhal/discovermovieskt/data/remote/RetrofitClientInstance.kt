@@ -9,15 +9,15 @@ object RetrofitClientInstance {
 
     fun getInstance(): Retrofit? {
 
-        if (retrofit == null) {
+        return if (retrofit == null) {
 
             retrofit = Retrofit.Builder()
                 .baseUrl(base_url)
                 .build()
 
-            return retrofit
+            retrofit
         } else
-            return retrofit
+            retrofit
     }
 
 }
