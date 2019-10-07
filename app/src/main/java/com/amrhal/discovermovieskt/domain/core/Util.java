@@ -1,4 +1,4 @@
-package com.amrhal.discovermovieskt.util;
+package com.amrhal.discovermovieskt.domain.core;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;

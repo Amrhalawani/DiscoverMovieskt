@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.amrhal.discovermovieskt.R
-import com.amrhal.discovermovieskt.data.model.Movie
+import com.amrhal.discovermovieskt.domain.entities.Movie
 import kotlinx.android.synthetic.main.activity_main.*
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
 
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setupBottomNav() {
-        bottomNavigationView = findViewById<BottomNavigationViewEx>(R.id.main_bottom_navigation)
+        bottomNavigationView = findViewById(R.id.main_bottom_navigation)
         bottomNavigationView?.enableAnimation(true)
         bottomNavigationView?.enableItemShiftingMode(false)
         bottomNavigationView?.enableShiftingMode(true)
@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView?.onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
 
+            //TODO bug here: remove replacefragment and add navigation lib
             when (it.itemId) {
                 R.id.home_menu_item -> {
                     tabs.visibility = View.VISIBLE

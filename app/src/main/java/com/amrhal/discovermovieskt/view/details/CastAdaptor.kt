@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.amrhal.discovermovieskt.R
-import com.amrhal.discovermovieskt.data.model.Actor
+import com.amrhal.discovermovieskt.domain.entities.Actor
 import com.squareup.picasso.Picasso
 
 import kotlinx.android.synthetic.main.item_actor.view.*

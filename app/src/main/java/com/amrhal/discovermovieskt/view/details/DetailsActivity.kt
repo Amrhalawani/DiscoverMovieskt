@@ -10,10 +10,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 
 import com.amrhal.discovermovieskt.R
-import com.amrhal.discovermovieskt.data.model.Actor
-import com.amrhal.discovermovieskt.data.model.Movie
-import com.amrhal.discovermovieskt.data.model.Trailer
-import com.amrhal.discovermovieskt.util.Util
+import com.amrhal.discovermovieskt.domain.entities.Actor
+import com.amrhal.discovermovieskt.domain.entities.Movie
+import com.amrhal.discovermovieskt.domain.entities.Trailer
+import com.amrhal.discovermovieskt.domain.core.Util
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_content_details.*
 import kotlinx.android.synthetic.main.activity_details.*

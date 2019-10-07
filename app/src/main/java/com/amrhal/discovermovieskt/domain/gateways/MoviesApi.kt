@@ -1,4 +1,4 @@
-package com.amrhal.discovermovieskt.data.remote
+package com.amrhal.discovermovieskt.domain.gateways
 
 import okhttp3.ResponseBody
 import retrofit2.Call

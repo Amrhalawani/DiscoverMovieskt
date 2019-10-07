@@ -1,12 +1,12 @@
-package com.amrhal.discovermovieskt.data.remote
+package com.amrhal.discovermovieskt.domain.gateways
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.amrhal.discovermovieskt.BuildConfig
-import com.amrhal.discovermovieskt.data.model.Actor
-import com.amrhal.discovermovieskt.data.model.Movie
-import com.amrhal.discovermovieskt.data.model.Trailer
+import com.amrhal.discovermovieskt.domain.entities.Actor
+import com.amrhal.discovermovieskt.domain.entities.Movie
+import com.amrhal.discovermovieskt.domain.entities.Trailer
 import com.google.gson.Gson
 import okhttp3.ResponseBody
 import retrofit2.Call

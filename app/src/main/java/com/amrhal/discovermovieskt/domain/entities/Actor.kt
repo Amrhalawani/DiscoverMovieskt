@@ -1,4 +1,4 @@
-package com.amrhal.discovermovieskt.data.model
+package com.amrhal.discovermovieskt.domain.entities
 
 import com.google.gson.annotations.SerializedName
 

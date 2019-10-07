@@ -3,10 +3,9 @@ package com.amrhal.discovermovieskt.view.details
 import androidx.lifecycle.LiveData
 
 import androidx.lifecycle.ViewModel
-import com.amrhal.discovermovieskt.data.model.Actor
-import com.amrhal.discovermovieskt.data.model.Movie
-import com.amrhal.discovermovieskt.data.model.Trailer
-import com.amrhal.discovermovieskt.data.remote.ServiceRepo
+import com.amrhal.discovermovieskt.domain.entities.Actor
+import com.amrhal.discovermovieskt.domain.entities.Trailer
+import com.amrhal.discovermovieskt.domain.gateways.ServiceRepo
 
 
 class DetailActivityViewModel : ViewModel() {

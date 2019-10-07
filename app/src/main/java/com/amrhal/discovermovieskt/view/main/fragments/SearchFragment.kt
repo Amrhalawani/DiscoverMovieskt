@@ -12,10 +12,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.amrhal.discovermovieskt.R
-import com.amrhal.discovermovieskt.data.model.Movie
+import com.amrhal.discovermovieskt.domain.entities.Movie
 import com.amrhal.discovermovieskt.view.details.DetailsActivity
 import com.amrhal.discovermovieskt.view.main.MainActivityViewModel
-import kotlinx.android.synthetic.main.frag_search.*
 import kotlinx.android.synthetic.main.frag_search.view.*
 
 @SuppressLint("ValidFragment")

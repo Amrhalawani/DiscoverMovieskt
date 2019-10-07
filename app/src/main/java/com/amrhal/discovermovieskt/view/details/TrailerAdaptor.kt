@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.amrhal.discovermovieskt.R
-import com.amrhal.discovermovieskt.data.model.Trailer
+import com.amrhal.discovermovieskt.domain.entities.Trailer
 
 import com.squareup.picasso.Picasso
 

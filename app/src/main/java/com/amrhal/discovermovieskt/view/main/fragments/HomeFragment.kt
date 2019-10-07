@@ -10,11 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.amrhal.discovermovieskt.R
-import com.amrhal.discovermovieskt.data.model.Movie
-import com.amrhal.discovermovieskt.util.Constants.Companion.NOW_PLAYING_MOVIES
-import com.amrhal.discovermovieskt.util.Constants.Companion.POPULAR_MOVIES
-import com.amrhal.discovermovieskt.util.Constants.Companion.TOP_RATED_MOVIES
-import com.amrhal.discovermovieskt.util.Constants.Companion.UP_COMING_MOVIES
+import com.amrhal.discovermovieskt.domain.entities.Movie
+import com.amrhal.discovermovieskt.domain.core.Constants.Companion.NOW_PLAYING_MOVIES
+import com.amrhal.discovermovieskt.domain.core.Constants.Companion.POPULAR_MOVIES
+import com.amrhal.discovermovieskt.domain.core.Constants.Companion.TOP_RATED_MOVIES
+import com.amrhal.discovermovieskt.domain.core.Constants.Companion.UP_COMING_MOVIES
 import com.amrhal.discovermovieskt.view.details.DetailsActivity
 import com.amrhal.discovermovieskt.view.main.MainActivityViewModel
 import com.amrhal.discovermovieskt.view.main.MoviesAdaptor

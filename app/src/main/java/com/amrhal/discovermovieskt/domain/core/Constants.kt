@@ -1,4 +1,4 @@
-package com.amrhal.discovermovieskt.util
+package com.amrhal.discovermovieskt.domain.core
 
 class Constants {
 

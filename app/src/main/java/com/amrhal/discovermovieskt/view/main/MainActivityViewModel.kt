@@ -3,9 +3,8 @@ package com.amrhal.discovermovieskt.view.main
 import androidx.lifecycle.LiveData
 
 import androidx.lifecycle.ViewModel
-import com.amrhal.discovermovieskt.data.model.Movie
-import com.amrhal.discovermovieskt.data.model.SearchedMovie
-import com.amrhal.discovermovieskt.data.remote.ServiceRepo
+import com.amrhal.discovermovieskt.domain.entities.Movie
+import com.amrhal.discovermovieskt.domain.gateways.ServiceRepo
 
 
 class MainActivityViewModel : ViewModel() {
