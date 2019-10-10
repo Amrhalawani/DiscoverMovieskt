@@ -14,11 +14,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.amrhal.discovermovieskt.R
 import com.amrhal.discovermovieskt.domain.entities.Movie
 import com.amrhal.discovermovieskt.view.details.DetailsActivity
-import com.amrhal.discovermovieskt.view.main.MainActivityViewModel
+import com.amrhal.discovermovieskt.view.main.MainActivityVM
 import kotlinx.android.synthetic.main.frag_search.view.*
 
 @SuppressLint("ValidFragment")
-object SearchFragment : Fragment() {
+class SearchFragment : Fragment() {
     var resultList: ArrayList<Movie.Result> = arrayListOf()
     var adaptor: SearchedMoviesAdaptor? = null
 
@@ -27,12 +27,12 @@ object SearchFragment : Fragment() {
         recyclerViewSetup(view)
 
 
-        view.search_button.setOnClickListener {
-            var query = view.Search_editText.text.toString()
+        view.btn_search.setOnClickListener {
+            var query = view.et_search.text.toString()
             if (query.length >= 1){
                 observeFromViewModel(query,view)
                 it.visibility = View.INVISIBLE
-                view.search_progruss.visibility = View.VISIBLE
+                view.progruss_search.visibility = View.VISIBLE
             }
             Toast.makeText(activity?.applicationContext, "query = $query", Toast.LENGTH_SHORT).show()
         }
@@ -46,7 +46,7 @@ object SearchFragment : Fragment() {
     }
 
     private fun recyclerViewSetup(view: View) {
-        view.search_movies_recyclerview.layoutManager = GridLayoutManager(activity, 1)
+        view.rv_search_movies.layoutManager = GridLayoutManager(activity, 1)
 
         adaptor = SearchedMoviesAdaptor(resultList as List<Movie.Result>, this.activity!!) {
             Toast.makeText(activity?.applicationContext, "${it.title} Clicked", Toast.LENGTH_SHORT).show()
@@ -58,20 +58,20 @@ object SearchFragment : Fragment() {
         }
 
         // adaptor?.updateMoviesList(list)
-        view.search_movies_recyclerview.adapter = adaptor
+        view.rv_search_movies.adapter = adaptor
         //  Toast.makeText(activity, "list = ${list.size}", Toast.LENGTH_SHORT).show()
     }
 
 
     private fun observeFromViewModel(query: String, view: View) {
 
-        val model = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+        val model = ViewModelProviders.of(this).get(MainActivityVM::class.java)
         model.getSearchedMovies(query).observe(this, Observer<Movie> { result ->
             resultList = result?.results as ArrayList<Movie.Result>
             adaptor?.updateMoviesList(resultList)
 
-            view.search_progruss.visibility = View.GONE
-            view.search_button.visibility = View.VISIBLE
+            view.progruss_search.visibility = View.GONE
+            view.btn_search.visibility = View.VISIBLE
 
         })
 

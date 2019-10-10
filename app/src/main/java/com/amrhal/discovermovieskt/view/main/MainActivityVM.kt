@@ -7,7 +7,7 @@ import com.amrhal.discovermovieskt.domain.entities.Movie
 import com.amrhal.discovermovieskt.domain.gateways.ServiceRepo
 
 
-class MainActivityViewModel : ViewModel() {
+class MainActivityVM : ViewModel() {
 
     var observable: LiveData<Movie>? = null
 

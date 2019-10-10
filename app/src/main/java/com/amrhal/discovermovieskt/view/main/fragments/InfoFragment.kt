@@ -1,6 +1,6 @@
 package com.amrhal.discovermovieskt.view.main.fragments
 
-import android.annotation.SuppressLint
+
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,8 +12,7 @@ import com.amrhal.discovermovieskt.R
 import kotlinx.android.synthetic.main.frag_info.view.*
 
 
-@SuppressLint("ValidFragment")
-object InfoFragment : Fragment() {
+class InfoFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -26,8 +25,8 @@ object InfoFragment : Fragment() {
     private fun setupActions(rootView: View) {
         rootView.view_privacy_policy_info_frag.setOnClickListener {
             val openURL = Intent(Intent.ACTION_VIEW)
-            openURL.data = Uri.parse(getString(R.string.privecy_policy_url))
-            startActivity(openURL)
+            openURL.data = Uri.parse (getString(R.string.privecy_policy_url))
+            startActivity (openURL)
         }
 
     }

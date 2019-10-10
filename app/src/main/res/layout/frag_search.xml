@@ -11,44 +11,44 @@
             android:isScrollContainer="true">
 
         <EditText
-                android:id="@+id/Search_editText"
+                android:id="@+id/et_search"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/EditTextStyle"
                 android:fontFamily="@font/coustard"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
-                android:hint="Search for a Movie :"
-                app:layout_constraintEnd_toStartOf="@+id/search_button"
+                android:maxLines="1"
+                android:hint="Search here for a Movie..."
+                app:layout_constraintEnd_toStartOf="@+id/btn_search"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent"/>
         <ProgressBar
-                android:id="@+id/search_progruss"
+                android:id="@+id/progruss_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/Search_editText"
+                app:layout_constraintTop_toTopOf="@+id/et_search"
                 android:visibility="gone"
 
         />
         <ImageButton
-                android:text="Search"
                 android:layout_width="50dp"
                 android:layout_height="46dp"
-                android:id="@+id/search_button"
+                android:id="@+id/btn_search"
                 android:padding="4dp"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:src="@drawable/ic_search_black_24dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/Search_editText"/>
+                app:layout_constraintTop_toTopOf="@+id/et_search"/>
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/search_movies_recyclerview"
+                android:id="@+id/rv_search_movies"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/search_button"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/btn_search"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
         />
