@@ -22,6 +22,8 @@ import com.amrhal.discovermovieskt.domain.core.Util
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_content_details.*
 import kotlinx.android.synthetic.main.activity_details.*
+import android.view.MenuItem
+
 
 class DetailsActivity : AppCompatActivity() {
     var list: ArrayList<Actor.Cast> = arrayListOf()
@@ -37,11 +39,26 @@ class DetailsActivity : AppCompatActivity() {
         val selectedMovie = intent.getParcelableExtra<Movie.Result>(MOVIE_KEY)
         val id: String = selectedMovie.id.toString()
 
+        setupActionBar()
         setupUI(selectedMovie)
         setupTrailerRV()
         getTrailers(id)
         setupCastRV()
         getCast(id)
+    }
+
+    private fun setupActionBar() {
+        setSupportActionBar(toolbar_details)
+        supportActionBar?.title = " "
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // handle arrow click here
+        if (item.itemId === android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     @SuppressLint("SetTextI18n")
@@ -71,9 +88,9 @@ class DetailsActivity : AppCompatActivity() {
         val model = ViewModelProviders.of(this).get(DetailActivityViewModel::class.java)
         model.getCast(id).observe(this, Observer<Actor> { result ->
             list = result.cast as ArrayList<Actor.Cast>
-            if(list.size == 0){
+            if (list.size == 0) {
                 layout_actors.visibility = View.GONE
-            }else{
+            } else {
                 adaptor?.updateMoviesList(list)
             }
 
@@ -97,9 +114,9 @@ class DetailsActivity : AppCompatActivity() {
         val modelt = ViewModelProviders.of(this).get(DetailActivityViewModel::class.java)
         modelt.getTrailer(id).observe(this, Observer<Trailer> { result ->
             listTrailer = result.results as ArrayList<Trailer.Result>
-            if(listTrailer.size == 0){
+            if (listTrailer.size == 0) {
                 layout_trailer_details.visibility = View.GONE
-            }else{
+            } else {
                 adaptortrailer?.updateMoviesList(listTrailer)
             }
         })
