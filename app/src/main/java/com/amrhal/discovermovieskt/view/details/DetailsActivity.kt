@@ -10,6 +10,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 
 import com.amrhal.discovermovieskt.R
+import com.amrhal.discovermovieskt.domain.core.Constants.MOVIE_KEY
+import com.amrhal.discovermovieskt.domain.core.Constants.PIC_BASE_URL_185
+import com.amrhal.discovermovieskt.domain.core.Constants.PIC_BASE_URL_500
 import com.amrhal.discovermovieskt.domain.entities.Actor
 import com.amrhal.discovermovieskt.domain.entities.Movie
 import com.amrhal.discovermovieskt.domain.entities.Trailer
@@ -29,7 +32,7 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
-        val selectedMovie = intent.getParcelableExtra<Movie.Result>("movieo")
+        val selectedMovie = intent.getParcelableExtra<Movie.Result>(MOVIE_KEY)
         val id: String = selectedMovie.id.toString()
 
         setupUI(selectedMovie)
@@ -43,13 +46,13 @@ class DetailsActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun setupUI(selectedMovie: Movie.Result) {
-        Picasso.get().load("https://image.tmdb.org/t/p/w185${selectedMovie.posterPath}").into(poster_detail)
+        Picasso.get().load("$PIC_BASE_URL_185${selectedMovie.posterPath}").into(poster_detail)
         avarege.text = selectedMovie.voteAverage.toString()
         titley.text = selectedMovie.title
         releasedate.text = selectedMovie.releaseDate.toString()
         over_mentID.text = selectedMovie.overview.toString()
         original_titleID.text = "${selectedMovie.originalTitle.toString()} (${selectedMovie.originalLanguage})"
-        Picasso.get().load("https://image.tmdb.org/t/p/w500${selectedMovie.backdropPath}").into(backImagecollapsedID)
+        Picasso.get().load("$PIC_BASE_URL_500${selectedMovie.backdropPath}").into(backImagecollapsedID)
     }
 
     private fun castRecyclerViewSetup() {
@@ -57,10 +60,9 @@ class DetailsActivity : AppCompatActivity() {
         recyclerview_cast.layoutManager = GridLayoutManager(this, 4)
 
         adaptor = CastAdaptor(list as List<Actor.Cast>, this) {
-            Toast.makeText(applicationContext, "${it.name} Clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "${it.name}", Toast.LENGTH_SHORT).show()
         }
         recyclerview_cast.adapter = adaptor
-        Toast.makeText(applicationContext, "list = ${list.size}", Toast.LENGTH_SHORT).show()
     }
 
     fun getCast(id: String) {
@@ -84,7 +86,6 @@ class DetailsActivity : AppCompatActivity() {
         }
 
         recyclerview_trailer.adapter = adaptortrailer
-        Toast.makeText(applicationContext, "list = ${list.size}", Toast.LENGTH_SHORT).show()
 
     }
 

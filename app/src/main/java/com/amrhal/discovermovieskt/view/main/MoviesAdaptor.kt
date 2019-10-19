@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.amrhal.discovermovieskt.R
 import com.amrhal.discovermovieskt.domain.entities.Movie
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_list.view.*
+import kotlinx.android.synthetic.main.item_movie.view.*
 
 /**
  * Created by Amr hal on 19/12/2018.
@@ -29,7 +29,7 @@ class MoviesAdaptor(var moviesList: List<Movie.Result>,
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(LayoutInflater.from(context).inflate(R.layout.item_list, parent, false))
+        return MovieViewHolder(LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false))
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
@@ -42,7 +42,6 @@ class MoviesAdaptor(var moviesList: List<Movie.Result>,
 
     // Gets the number of animals in the list
     override fun getItemCount(): Int {
-        Log.e("tag","List getItemCount() = ${moviesList.size}")
         return moviesList.size
     }
 
@@ -66,7 +65,7 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     //extension Fun
     private fun ImageView.loadUrlPicasso(url: String) {
         Picasso.get().load("https://image.tmdb.org/t/p/w185$url").into(this)
-        Log.e("tag","https://image.tmdb.org/t/p/w185$url")
+        //Log.e("tag","https://image.tmdb.org/t/p/w185$url")
     }
 
     //extension Fun

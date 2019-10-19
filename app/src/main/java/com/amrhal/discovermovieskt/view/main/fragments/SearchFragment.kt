@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.amrhal.discovermovieskt.R
+import com.amrhal.discovermovieskt.domain.core.Constants.MOVIE_KEY
 import com.amrhal.discovermovieskt.domain.entities.Movie
 import com.amrhal.discovermovieskt.view.details.DetailsActivity
 import com.amrhal.discovermovieskt.view.main.MainActivityVM
@@ -22,6 +23,11 @@ class SearchFragment : Fragment() {
     var resultList: ArrayList<Movie.Result> = arrayListOf()
     var adaptor: SearchedMoviesAdaptor? = null
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.frag_search, container, false)
         recyclerViewSetup(view)
@@ -53,7 +59,7 @@ class SearchFragment : Fragment() {
          val intent = Intent(activity?.applicationContext, DetailsActivity::class.java)
            //Todo change this implementation to parcelable later...
 
-           intent.putExtra("movieo", it)
+           intent.putExtra(MOVIE_KEY, it)
             startActivity(intent)
         }
 
@@ -67,7 +73,7 @@ class SearchFragment : Fragment() {
 
         val model = ViewModelProviders.of(this).get(MainActivityVM::class.java)
         model.getSearchedMovies(query).observe(this, Observer<Movie> { result ->
-            resultList = result?.results as ArrayList<Movie.Result>
+            resultList = result?.moviesList as ArrayList<Movie.Result>
             adaptor?.updateMoviesList(resultList)
 
             view.progruss_search.visibility = View.GONE

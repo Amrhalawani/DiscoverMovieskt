@@ -63,6 +63,7 @@ object ServiceRepo {
                 val MResponse:String? = response.body()?.string()
                 val gson = Gson()
                 val movie = gson.fromJson(MResponse, Movie::class.java)
+
                 data.value = movie
             }
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
