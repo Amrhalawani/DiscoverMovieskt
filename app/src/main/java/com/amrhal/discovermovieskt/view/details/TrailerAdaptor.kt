@@ -14,7 +14,7 @@ import com.amrhal.discovermovieskt.domain.entities.Trailer
 
 import com.squareup.picasso.Picasso
 
-import kotlinx.android.synthetic.main.item_video.view.*
+import kotlinx.android.synthetic.main.item_trailer.view.*
 
 /**
  * Created by Amr hal on 16/01/2019.
@@ -32,7 +32,7 @@ class TrailerAdaptor(var trailersList: List<Trailer.Result>,
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrailerViewHolder {
-        return TrailerViewHolder(LayoutInflater.from(context).inflate(R.layout.item_video, parent, false))
+        return TrailerViewHolder(LayoutInflater.from(context).inflate(R.layout.item_trailer, parent, false))
     }
 
     override fun onBindViewHolder(holder: TrailerViewHolder, position: Int) {

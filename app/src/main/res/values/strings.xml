@@ -74,7 +74,10 @@
     <string name="search">Search</string>
     <string name="info">info</string>
     <string name="privacy_policy">Privacy Policy</string>
-    <string name="share_with_your_frinds">Share with your frinds</string>
+    <string name="share_with_your_frinds">Share with your friends</string>
     <string name="privecy_policy_url">https://movielix.flycricket.io/privacy.html</string>
+    <string name="top_billed_cast">Top Billed Cast :</string>
+    <string name="trailers">Trailers :</string>
+    <string name="search_here_for_a_movie">Search here for a Movie...</string>
 
 </resources>

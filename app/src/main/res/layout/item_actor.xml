@@ -2,8 +2,9 @@
 <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_height="210dp"
+        android:layout_width="120dp"
+        xmlns:tools="http://schemas.android.com/tools"
         xmlns:card_view="http://schemas.android.com/tools"
         app:cardCornerRadius="8dp"
         app:cardBackgroundColor="@color/dark_white"
@@ -17,27 +18,32 @@
     >
         <ImageView
                 android:id="@+id/actor_pic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/auther"
+                android:layout_width="120dp"
+                android:scaleType="centerCrop"
+                android:layout_height="170dp"
+
+                app:srcCompat="@drawable/user_placeholder"
         />
 
         <TextView
                 android:id="@+id/actorName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Actor Name"
+                tools:text="Actor Name/n dasddasda"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:gravity="center"
+                android:layout_marginTop="3dp"
+                android:maxLines="2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/actor_pic"/>
         <TextView
                 android:id="@+id/character"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="character"
+                tools:text="character /n dasddasda"
                 android:textSize="10sp"
+                android:maxLines="2"
                 android:textColor="@color/off_white"
                 android:gravity="center"
                 app:layout_constraintStart_toStartOf="parent"

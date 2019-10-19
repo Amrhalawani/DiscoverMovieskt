@@ -2,12 +2,14 @@ package com.amrhal.discovermovieskt.view.details
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.amrhal.discovermovieskt.R
 import com.amrhal.discovermovieskt.domain.core.Constants.MOVIE_KEY
@@ -36,11 +38,9 @@ class DetailsActivity : AppCompatActivity() {
         val id: String = selectedMovie.id.toString()
 
         setupUI(selectedMovie)
-
-        TrailerRecyclerViewSetup()
+        setupTrailerRV()
         getTrailers(id)
-
-        castRecyclerViewSetup()
+        setupCastRV()
         getCast(id)
     }
 
@@ -55,9 +55,11 @@ class DetailsActivity : AppCompatActivity() {
         Picasso.get().load("$PIC_BASE_URL_500${selectedMovie.backdropPath}").into(backImagecollapsedID)
     }
 
-    private fun castRecyclerViewSetup() {
-
-        recyclerview_cast.layoutManager = GridLayoutManager(this, 4)
+    private fun setupCastRV() {
+        recyclerview_cast.layoutManager = LinearLayoutManager(
+            this,
+            LinearLayoutManager.HORIZONTAL, false
+        )
 
         adaptor = CastAdaptor(list as List<Actor.Cast>, this) {
             Toast.makeText(applicationContext, "${it.name}", Toast.LENGTH_SHORT).show()
@@ -69,22 +71,24 @@ class DetailsActivity : AppCompatActivity() {
         val model = ViewModelProviders.of(this).get(DetailActivityViewModel::class.java)
         model.getCast(id).observe(this, Observer<Actor> { result ->
             list = result.cast as ArrayList<Actor.Cast>
-            adaptor?.updateMoviesList(list)
+            if(list.size == 0){
+                layout_actors.visibility = View.GONE
+            }else{
+                adaptor?.updateMoviesList(list)
+            }
 
         })
 
     }
 
-    private fun TrailerRecyclerViewSetup() {
+    private fun setupTrailerRV() {
 
         recyclerview_trailer.layoutManager = GridLayoutManager(this, 2)
 
         adaptortrailer = TrailerAdaptor(listTrailer as List<Trailer.Result>, this) {
             //  Toast.makeText(applicationContext, "${it.name} Clicked", Toast.LENGTH_SHORT).show()
             Util.watchYoutubeVideo(this, it.key)
-
         }
-
         recyclerview_trailer.adapter = adaptortrailer
 
     }
@@ -93,9 +97,11 @@ class DetailsActivity : AppCompatActivity() {
         val modelt = ViewModelProviders.of(this).get(DetailActivityViewModel::class.java)
         modelt.getTrailer(id).observe(this, Observer<Trailer> { result ->
             listTrailer = result.results as ArrayList<Trailer.Result>
-            adaptortrailer?.updateMoviesList(listTrailer)
-
-            Toast.makeText(this, "${listTrailer.size}", Toast.LENGTH_SHORT).show()
+            if(listTrailer.size == 0){
+                layout_trailer_details.visibility = View.GONE
+            }else{
+                adaptortrailer?.updateMoviesList(listTrailer)
+            }
         })
 
     }

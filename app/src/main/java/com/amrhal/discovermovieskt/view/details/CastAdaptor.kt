@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.amrhal.discovermovieskt.R
+import com.amrhal.discovermovieskt.domain.core.Constants.PIC_BASE_URL_185
 import com.amrhal.discovermovieskt.domain.entities.Actor
 import com.squareup.picasso.Picasso
 
@@ -67,9 +68,10 @@ class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     //extension Fun
     private fun ImageView.loadUrlPicasso(url: String) {
-        Picasso.get().load("https://image.tmdb.org/t/p/w185$url").into(this)
+        Picasso.get()
+            .load("$PIC_BASE_URL_185$url").into(this)
 
-        Log.e("tag","https://image.tmdb.org/t/p/w185$url")
+        Log.e("tag","$PIC_BASE_URL_185$url")
     }
 
 }

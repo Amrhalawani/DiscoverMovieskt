@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-
         xmlns:app="http://schemas.android.com/apk/res-auto"
-android:padding="5dp"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:padding="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="150dp">
 
     <TextView
             android:id="@+id/video_nameID"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:background="#434343"
-            android:padding="5dp"
+
             android:textColor="@color/white"
-            android:text="TextView"
+            android:maxLines="3"
+            android:padding="3dp"
+            tools:text="TextView"
             app:layout_constraintEnd_toEndOf="@+id/video_thumbnial"
             app:layout_constraintStart_toStartOf="@+id/video_thumbnial"
             app:layout_constraintTop_toBottomOf="@+id/video_thumbnial"/>
@@ -25,18 +24,19 @@ android:padding="5dp"
     <ImageView
             android:id="@+id/video_thumbnial"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/user_placeholder"
+
     />
 
     <ImageView
             android:id="@+id/video_play"
             android:layout_width="72dp"
             android:layout_height="72dp"
+            android:outlineAmbientShadowColor="#000000"
             app:layout_constraintBottom_toBottomOf="@+id/video_thumbnial"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
