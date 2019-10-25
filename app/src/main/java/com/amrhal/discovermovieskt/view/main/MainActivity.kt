@@ -3,7 +3,9 @@ package com.amrhal.discovermovieskt.view.main
 import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -46,6 +48,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
+        private var doubleBackToExitPressedOnce = false
+        override fun onBackPressed() {
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed()
+                return
+            }
+            this.doubleBackToExitPressedOnce = true
+            Toast.makeText(this, getString(R.string.please_ckick_back_again_to_exit), Toast.LENGTH_SHORT).show()
+
+            Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+        }
+
 
     private fun setupBottomNavMenu(navController: NavController) {
         // val bottomNav = findViewById<BottomNavigationView>(R.id.main_bottom_navigation)

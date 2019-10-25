@@ -79,7 +79,7 @@ class DetailsActivity : AppCompatActivity() {
         )
 
         adaptor = CastAdaptor(list as List<Actor.Cast>, this) {
-            Toast.makeText(applicationContext, "${it.name}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "cast id ${it.castId}/ id ${it.id} / creditId ${it.creditId} ", Toast.LENGTH_SHORT).show()
         }
         recyclerview_cast.adapter = adaptor
     }

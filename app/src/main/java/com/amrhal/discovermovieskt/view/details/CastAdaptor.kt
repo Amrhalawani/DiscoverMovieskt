@@ -45,7 +45,6 @@ class CastAdaptor(var actorsList: List<Actor.Cast>,
 
     // Gets the number of animals in the list
     override fun getItemCount(): Int {
-        Log.e("tag","List getItemCount() = ${actorsList.size}")
         return actorsList.size
     }
 
@@ -55,7 +54,7 @@ class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
     fun bind(actoritem: Actor.Cast, listener: (Actor.Cast) -> Unit) = with(itemView) {
-        itemView.actor_pic.loadUrlPicasso(actoritem.profilePath.toString())
+        itemView.actor_pic.loadUrlPicasso(actoritem.profilePath.toString(), actoritem.gender!!)
         itemView.character.text = actoritem.character
         itemView.actorName.text = actoritem.name
 
@@ -67,9 +66,10 @@ class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     //extension Fun
-    private fun ImageView.loadUrlPicasso(url: String) {
+    private fun ImageView.loadUrlPicasso(url: String,gender:Int) {
         Picasso.get()
-            .load("$PIC_BASE_URL_185$url").into(this)
+            .load("$PIC_BASE_URL_185$url")
+            .placeholder(if (gender == 2)R.drawable.ic_man_silhouette else R.drawable.ic_woman_silhouette ).into(this)
 
         Log.e("tag","$PIC_BASE_URL_185$url")
     }

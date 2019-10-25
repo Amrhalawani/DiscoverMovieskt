@@ -186,9 +186,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="e8e8e8" />
-                            <entry key="outputName" value="ic_keyboard_arrow_right_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\Amr Halawani" />
+                            <entry key="outputName" value="ic_woman" />
+                            <entry key="sourceFile" value="C:\Users\Amr Halawani\Desktop\movielix\woman.svg" />
                           </map>
                         </option>
                       </PersistentState>
