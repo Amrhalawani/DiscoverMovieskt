@@ -1,7 +1,6 @@
 package com.amrhal.discovermovieskt.view.main
 
 import android.content.Context
-import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.amrhal.discovermovieskt.R
-import com.amrhal.discovermovieskt.domain.core.Constants.PIC_BASE_URL_185
+import com.amrhal.discovermovieskt.domain.core.Constants.PIC_BASE_URL_300
+import com.amrhal.discovermovieskt.domain.core.Constants.currentYear
 import com.amrhal.discovermovieskt.domain.entities.Movie
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_movie.view.*
@@ -18,12 +18,12 @@ import kotlinx.android.synthetic.main.item_movie.view.*
  * Created by Amr hal on 19/12/2018.
  */
 
-class MoviesAdaptor(var moviesList: List<Movie.Result>,
-    var context: Context,
-    val listener: (Movie.Result) -> Unit
+class MoviesAdaptor(var moviesList: List<Movie.MovieResult>,
+                    var context: Context,
+                    val listener: (Movie.MovieResult) -> Unit
 ) : RecyclerView.Adapter<MovieViewHolder>() {
 
-    fun updateMoviesList(newitems: List<Movie.Result>) {
+    fun updateMoviesList(newitems: List<Movie.MovieResult>) {
         moviesList = newitems
         notifyDataSetChanged()
     }
@@ -51,13 +51,17 @@ class MoviesAdaptor(var moviesList: List<Movie.Result>,
 class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
-    fun bind(movieitem: Movie.Result, listener: (Movie.Result) -> Unit) = with(itemView) {
+    fun bind(movieitem: Movie.MovieResult, listener: (Movie.MovieResult) -> Unit) = with(itemView) {
         itemView.movieposterIV_ID.loadUrlPicasso(movieitem.posterPath)
-        itemView.movie_name.text = movieitem.title
+        itemView.text_name_movie_item.text = movieitem.title
         itemView.movie_rate.text = "★ " + movieitem.voteAverage.toString()
-        itemView.release_date.text = if (movieitem.releaseDate?.substring(0,4) == "2019") movieitem.releaseDate else movieitem.releaseDate?.substring(0,4)
 
-        //itemView.testText.text = movieitem.title
+        itemView.release_date.text = if (movieitem.releaseDate?.substring(0,4) == currentYear.toString()) movieitem.releaseDate else movieitem.releaseDate?.substring(0,4)
+
+        if(movieitem.video==false)
+            itemView.image_has_video_movie_item.visibility = View.INVISIBLE
+        else itemView.image_has_video_movie_item.visibility = View.VISIBLE
+
         setOnClickListener { listener(movieitem) }
 
 
@@ -65,7 +69,7 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     //extension Fun
     private fun ImageView.loadUrlPicasso(url: String) {
-        Picasso.get().load("$PIC_BASE_URL_185$url").into(this)
+        Picasso.get().load("$PIC_BASE_URL_300$url").into(this)
         //Log.e("tag","https://image.tmdb.org/t/p/w185$url")
     }
 

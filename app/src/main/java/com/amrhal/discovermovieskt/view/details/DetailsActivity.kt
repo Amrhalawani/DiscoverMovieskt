@@ -36,7 +36,7 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
-        val selectedMovie = intent.getParcelableExtra<Movie.Result>(MOVIE_KEY)
+        val selectedMovie = intent.getParcelableExtra<Movie.MovieResult>(MOVIE_KEY)
         val id: String = selectedMovie.id.toString()
 
         setupActionBar()
@@ -62,7 +62,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun setupUI(selectedMovie: Movie.Result) {
+    private fun setupUI(selectedMovie: Movie.MovieResult) {
         Picasso.get().load("$PIC_BASE_URL_185${selectedMovie.posterPath}").into(poster_detail)
         avarege.text = selectedMovie.voteAverage.toString()
         titley.text = selectedMovie.title

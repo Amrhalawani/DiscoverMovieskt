@@ -13,6 +13,7 @@ import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.amrhal.discovermovieskt.R
 import com.amrhal.discovermovieskt.domain.entities.Movie
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -20,8 +21,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
 
+
     // var bottomNavigationView: BottomNavigationViewEx? = null
-    var list: ArrayList<Movie.Result> = arrayListOf()
+    var list: ArrayList<Movie.MovieResult> = arrayListOf()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

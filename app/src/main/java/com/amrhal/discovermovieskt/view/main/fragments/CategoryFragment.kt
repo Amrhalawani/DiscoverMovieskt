@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.frag_category.*
 
 
 class CategoryFragment : Fragment() {
-    var list: ArrayList<Movie.Result> = arrayListOf()
+    var list: ArrayList<Movie.MovieResult> = arrayListOf()
     var adaptor: MoviesAdaptor? = null
     var categoryPos:Int = 0
     override fun onCreateView(
@@ -59,7 +59,7 @@ class CategoryFragment : Fragment() {
     private fun recyclerViewSetup() {
         rv_category.layoutManager = GridLayoutManager(activity, 2)
 
-        adaptor = MoviesAdaptor(list as List<Movie.Result>, this.activity!!) {
+        adaptor = MoviesAdaptor(list as List<Movie.MovieResult>, this.activity!!) {
             val intent = Intent(activity?.applicationContext, DetailsActivity::class.java)
             intent.putExtra(MOVIE_KEY, it)
             startActivity(intent)
@@ -120,9 +120,9 @@ class CategoryFragment : Fragment() {
 
     }
 
-    private fun updateAdaptorList(results: List<Movie.Result>?) {
+    private fun updateAdaptorList(results: List<Movie.MovieResult>?) {
 
-        adaptor?.updateMoviesList(results as List<Movie.Result>)
+        adaptor?.updateMoviesList(results as List<Movie.MovieResult>)
         prograss_category.visibility = View.GONE
 
     }

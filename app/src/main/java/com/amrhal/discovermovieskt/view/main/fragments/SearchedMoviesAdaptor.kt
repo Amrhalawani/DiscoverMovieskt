@@ -19,12 +19,12 @@ import kotlinx.android.synthetic.main.item_searched_movie.view.*
  */
 
 class SearchedMoviesAdaptor(
-    var moviesList: List<Movie.Result>,
+    var moviesList: List<Movie.MovieResult>,
     var context: Context,
-    val listener: (Movie.Result) -> Unit
+    val listener: (Movie.MovieResult) -> Unit
 ) : RecyclerView.Adapter<MovieViewHolder>() {
 
-    fun updateMoviesList(newitems: List<Movie.Result>) {
+    fun updateMoviesList(newitems: List<Movie.MovieResult>) {
         moviesList = newitems
         notifyDataSetChanged()
     }
@@ -51,7 +51,7 @@ class SearchedMoviesAdaptor(
 class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
-    fun bind(movieitem: Movie.Result, listener: (Movie.Result) -> Unit) = with(itemView) {
+    fun bind(movieitem: Movie.MovieResult, listener: (Movie.MovieResult) -> Unit) = with(itemView) {
 
         itemView.movieposterIV_search.loadUrlPicasso(movieitem.posterPath)
         itemView.movie_name_search.text = movieitem.title

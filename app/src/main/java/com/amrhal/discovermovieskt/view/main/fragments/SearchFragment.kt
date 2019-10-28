@@ -17,12 +17,11 @@ import com.amrhal.discovermovieskt.domain.core.Constants.MOVIE_KEY
 import com.amrhal.discovermovieskt.domain.entities.Movie
 import com.amrhal.discovermovieskt.view.details.DetailsActivity
 import com.amrhal.discovermovieskt.view.main.MainActivityVM
-import kotlinx.android.synthetic.main.frag_search.*
 import kotlinx.android.synthetic.main.frag_search.view.*
 
 @SuppressLint("ValidFragment")
 class SearchFragment : Fragment() {
-    var resultList: ArrayList<Movie.Result> = arrayListOf()
+    var resultList: ArrayList<Movie.MovieResult> = arrayListOf()
     var adaptor: SearchedMoviesAdaptor? = null
 
 
@@ -65,7 +64,7 @@ class SearchFragment : Fragment() {
     private fun setupSearchedMoviesRV(view: View) {
         view.rv_search_movies.layoutManager = GridLayoutManager(activity, 1)
 
-        adaptor = SearchedMoviesAdaptor(resultList as List<Movie.Result>, this.activity!!) {
+        adaptor = SearchedMoviesAdaptor(resultList as List<Movie.MovieResult>, this.activity!!) {
             Toast.makeText(activity?.applicationContext, "${it.title} Clicked", Toast.LENGTH_SHORT).show()
          val intent = Intent(activity?.applicationContext, DetailsActivity::class.java)
            //Todo change this implementation to parcelable later...
@@ -80,7 +79,7 @@ class SearchFragment : Fragment() {
 
         val model = ViewModelProviders.of(this).get(MainActivityVM::class.java)
         model.getSearchedMovies(query).observe(this, Observer<Movie> { result ->
-            resultList = result?.moviesList as ArrayList<Movie.Result>
+            resultList = result?.moviesList as ArrayList<Movie.MovieResult>
             adaptor?.updateMoviesList(resultList)
 
             view.progruss_search.visibility = View.GONE

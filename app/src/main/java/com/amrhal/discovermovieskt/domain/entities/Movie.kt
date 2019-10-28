@@ -4,12 +4,16 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
+
+
+
+
 data class Movie(
     @SerializedName("page")
     val page: Int?,
 
     @SerializedName("results")
-    val moviesList: List<Result>?,
+    val moviesList: List<MovieResult>?,
 
     @SerializedName("total_pages")
     val totalPages: Int?,
@@ -17,7 +21,6 @@ data class Movie(
     @SerializedName("total_results")
     val totalResults: Int?
 ) : Parcelable {
-
 
     constructor(parcel: Parcel) : this(
         parcel.readValue(Int::class.java.classLoader) as? Int,
@@ -27,7 +30,7 @@ data class Movie(
     ) {
     }
 
-    data class Result(
+    data class MovieResult(
         @SerializedName("adult")
         val adult: Boolean?,
         @SerializedName("backdrop_path")
@@ -44,10 +47,13 @@ data class Movie(
         val overview: String?,
         @SerializedName("popularity")
         val popularity: Double?,
+
         @SerializedName("poster_path")
         val posterPath: String,
+
         @SerializedName("release_date")
         val releaseDate: String?,
+
         @SerializedName("title")
         val title: String?,
         @SerializedName("video")
@@ -57,6 +63,7 @@ data class Movie(
         @SerializedName("vote_count")
         val voteCount: Int?
     ) : Parcelable {
+
         constructor(parcel: Parcel) : this(
             parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
             parcel.readString(),
@@ -95,12 +102,12 @@ data class Movie(
             return 0
         }
 
-        companion object CREATOR : Parcelable.Creator<Result> {
-            override fun createFromParcel(parcel: Parcel): Result {
-                return Result(parcel)
+        companion object CREATOR : Parcelable.Creator<MovieResult> {
+            override fun createFromParcel(parcel: Parcel): MovieResult {
+                return MovieResult(parcel)
             }
 
-            override fun newArray(size: Int): Array<Result?> {
+            override fun newArray(size: Int): Array<MovieResult?> {
                 return arrayOfNulls(size)
             }
         }
@@ -126,3 +133,5 @@ data class Movie(
         }
     }
 }
+
+
