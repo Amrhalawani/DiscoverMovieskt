@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amrhal.discovermovieskt.R
+import com.amrhal.discovermovieskt.domain.core.Constants.MOVIE_ID_KEY
 import com.amrhal.discovermovieskt.domain.entities.Movie
-import com.amrhal.discovermovieskt.domain.core.Constants.MOVIE_KEY
 import com.amrhal.discovermovieskt.domain.core.Constants.NOW_PLAYING_MOVIES
 import com.amrhal.discovermovieskt.domain.core.Constants.POPULAR_MOVIES
 import com.amrhal.discovermovieskt.domain.core.Constants.TOP_RATED_MOVIES
@@ -61,7 +61,7 @@ class CategoryFragment : Fragment() {
 
         adaptor = MoviesAdaptor(list as List<Movie.MovieResult>, this.activity!!) {
             val intent = Intent(activity?.applicationContext, DetailsActivity::class.java)
-            intent.putExtra(MOVIE_KEY, it)
+            intent.putExtra(MOVIE_ID_KEY, it.id)
             startActivity(intent)
         }
         rv_category.adapter = adaptor

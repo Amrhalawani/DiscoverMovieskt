@@ -58,24 +58,4 @@
             app:pressedTranslationZ="12dp"
             android:src="@drawable/ic_fav_unchecked"/>
 
-    <!--<ToggleButton-->
-    <!--android:id="@+id/button_favorite"-->
-    <!--android:layout_width="50dp"-->
-    <!--android:layout_height="50dp"-->
-    <!--android:background="@drawable/ic_fav_selector"-->
-    <!--android:checked="false"-->
-    <!--android:text=""-->
-    <!--android:textOff=""-->
-    <!--android:textOn=""-->
-    <!--app:layout_anchor="@id/app_bar"-->
-    <!--app:layout_anchorGravity="center_horizontal|right" />-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="50dp"-->
-    <!--android:layout_height="50dp"-->
-    <!--app:layout_anchor="@id/app_bar"-->
-    <!--app:layout_anchorGravity="center_horizontal|right"-->
-    <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
-    <!--android:src="@drawable/ic_ellipse_1"/>-->
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

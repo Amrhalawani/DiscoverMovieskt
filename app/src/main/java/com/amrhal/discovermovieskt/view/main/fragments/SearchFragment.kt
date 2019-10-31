@@ -13,7 +13,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.amrhal.discovermovieskt.R
-import com.amrhal.discovermovieskt.domain.core.Constants.MOVIE_KEY
+import com.amrhal.discovermovieskt.domain.core.Constants
+
 import com.amrhal.discovermovieskt.domain.entities.Movie
 import com.amrhal.discovermovieskt.view.details.DetailsActivity
 import com.amrhal.discovermovieskt.view.main.MainActivityVM
@@ -67,8 +68,7 @@ class SearchFragment : Fragment() {
         adaptor = SearchedMoviesAdaptor(resultList as List<Movie.MovieResult>, this.activity!!) {
             Toast.makeText(activity?.applicationContext, "${it.title} Clicked", Toast.LENGTH_SHORT).show()
          val intent = Intent(activity?.applicationContext, DetailsActivity::class.java)
-           //Todo change this implementation to parcelable later...
-           intent.putExtra(MOVIE_KEY, it)
+           intent.putExtra(Constants.MOVIE_ID_KEY, it.id)
             startActivity(intent)
         }
         view.rv_search_movies.adapter = adaptor

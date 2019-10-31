@@ -20,6 +20,6 @@ object Constants {
 
 
     //intent data
-    val MOVIE_KEY = "movieo"
+    val MOVIE_ID_KEY = "movieid"
 
 }

@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                                       xmlns:app="http://schemas.android.com/apk/res-auto"
-                                       xmlns:tools="http://schemas.android.com/tools"
-                                       android:layout_width="match_parent"
-                                       android:layout_height="match_parent"
-                                       app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                                       tools:context="com.amrhal.discovermovieskt.view.details.DetailsActivity"
-                                       tools:showIn="@layout/activity_details">
+<androidx.core.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.amrhal.discovermovieskt.view.details.DetailsActivity"
+>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/details_activitybackg">
+
+        <ProgressBar
+                android:id="@+id/progress_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/label2"/>
 
         <ImageView
                 android:id="@+id/poster_detail"
@@ -35,6 +46,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/poster_detail"
+                android:animateLayoutChanges="true"
                 app:layout_constraintTop_toTopOf="parent">
 
 
@@ -43,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lemonada_semibold"
-                    android:text="0.0"
+                    tools:text="0.0"
                     android:textColor="@color/tab_enable"
                     android:textSize="34sp"/>
 
@@ -68,7 +80,7 @@
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/alfa_slab_one"
                 android:gravity="center"
-                android:text="TITLE HERE"
+                tools:text="TITLE HERE"
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -206,9 +218,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginEnd="20dp"/>
+                    android:layout_marginBottom="20dp"/>
 
         </LinearLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

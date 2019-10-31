@@ -1,5 +1,7 @@
 package com.amrhal.discovermovieskt.domain.gateways
 
+import com.amrhal.discovermovieskt.domain.entities.MovieDetailsRes
+import io.reactivex.Observable
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.GET
@@ -41,6 +43,12 @@ interface MoviesApi {
     // https://api.themoviedb.org/3/search/movie?api_key=7dc3c3d78e52290fbaaca09a7fb34436&language=en-US&query=mo&page=1&include_adult=false
     @GET("search/movie")
     fun searchMovie(@Query("api_key") apiKey: String, @Query("query") query: String, @Query("page") page: String, @Query("include_adult") includeAdult: Boolean): Call<ResponseBody>
+
+//    @GET("movie/{movie_id}")
+//    fun getMovieDetails(@Query("api_key") apiKey: String, @Path("movie_id") movieId: String): Observable<MovieDetailsRes>
+
+    @GET("movie/{movie_id}")
+    fun getMovieDetails( @Path("movie_id") movieId: String, @Query("api_key") apiKey: String): Call<ResponseBody>
 
 }
 

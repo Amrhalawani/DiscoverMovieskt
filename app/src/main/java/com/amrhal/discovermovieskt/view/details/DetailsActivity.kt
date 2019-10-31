@@ -13,19 +13,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.amrhal.discovermovieskt.R
-import com.amrhal.discovermovieskt.domain.core.Constants.MOVIE_KEY
 import com.amrhal.discovermovieskt.domain.core.Constants.PIC_BASE_URL_185
 import com.amrhal.discovermovieskt.domain.core.Constants.PIC_BASE_URL_500
-import com.amrhal.discovermovieskt.domain.entities.Actor
-import com.amrhal.discovermovieskt.domain.entities.Movie
-import com.amrhal.discovermovieskt.domain.entities.Trailer
 import com.amrhal.discovermovieskt.domain.core.Util
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_content_details.*
 import kotlinx.android.synthetic.main.activity_details.*
 import android.view.MenuItem
-import com.amrhal.discovermovieskt.domain.entities.FavMovie
-import com.amrhal.discovermovieskt.view.main.fragments.FavFragmentVM
+import com.amrhal.discovermovieskt.domain.core.Constants.MOVIE_ID_KEY
+import com.amrhal.discovermovieskt.domain.entities.*
+import com.amrhal.discovermovieskt.view.main.fragments.favourites.FavFragmentVM
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import kotlin.collections.ArrayList
@@ -36,7 +33,7 @@ class DetailsActivity : AppCompatActivity() {
     var list: ArrayList<Actor.Cast> = arrayListOf()
     var listTrailer: ArrayList<Trailer.Result> = arrayListOf()
 
-    private lateinit var selectedMovie: Movie.MovieResult
+    private lateinit var selectedMovie: MovieDetailsRes
     var adaptor: CastAdaptor? = null
     var adaptortrailer: TrailerAdaptor? = null
 
@@ -48,11 +45,11 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
-        selectedMovie = intent.getParcelableExtra<Movie.MovieResult>(MOVIE_KEY)
-        id = selectedMovie.id!!
+        id = intent.getIntExtra(MOVIE_ID_KEY,0)
 
         setupActionBar()
-        setupUI()
+        getMovieDetails()
+
         setupTrailerRV()
         getTrailers()
         setupCastRV()
@@ -118,7 +115,7 @@ class DetailsActivity : AppCompatActivity() {
 
         val newMovie = FavMovie(
             selectedMovie.adult, selectedMovie.id,
-            selectedMovie.popularity, selectedMovie.posterPath, selectedMovie.releaseDate,
+            selectedMovie.popularity, selectedMovie.posterPath!!, selectedMovie.releaseDate,
             selectedMovie.title, selectedMovie.voteAverage
         )
         favVM.insert(newMovie)
@@ -162,6 +159,16 @@ class DetailsActivity : AppCompatActivity() {
             ).show()
         }
         recyclerview_cast.adapter = adaptor
+    }
+
+    fun getMovieDetails() {
+        val model = ViewModelProviders.of(this).get(DetailActivityViewModel::class.java)
+        model.getMovieDetail(id.toString()).observe(this, Observer<MovieDetailsRes> { result ->
+         selectedMovie = result
+            setupUI()
+            progress_details.visibility = View.GONE
+        })
+
     }
 
     fun getCast() {

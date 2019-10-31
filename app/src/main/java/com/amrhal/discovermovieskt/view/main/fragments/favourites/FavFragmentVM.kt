@@ -1,4 +1,4 @@
-package com.amrhal.discovermovieskt.view.main.fragments
+package com.amrhal.discovermovieskt.view.main.fragments.favourites
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

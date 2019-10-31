@@ -1,4 +1,4 @@
-package com.amrhal.discovermovieskt.view.main.fragments
+package com.amrhal.discovermovieskt.view.main.fragments.favourites
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,15 +10,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.amrhal.discovermovieskt.R
-import com.amrhal.discovermovieskt.domain.core.Constants.MOVIE_KEY
+import com.amrhal.discovermovieskt.domain.core.Constants
 import com.amrhal.discovermovieskt.domain.entities.FavMovie
 import com.amrhal.discovermovieskt.view.details.DetailsActivity
+import com.amrhal.discovermovieskt.view.main.fragments.FavMoviesAdaptor
 import kotlinx.android.synthetic.main.frag_fav_movies.*
 import kotlinx.android.synthetic.main.frag_fav_movies.view.*
 
 
 class FavFragment : Fragment() {
-    lateinit var favAdaptor:FavMoviesAdaptor
+    lateinit var favAdaptor: FavMoviesAdaptor
 
     var favlist: ArrayList<FavMovie> = arrayListOf()
 
@@ -32,9 +33,12 @@ class FavFragment : Fragment() {
 
     private fun setupFavRV(rootview: View) {
         rootview.rv_fav.layoutManager = GridLayoutManager(activity, 2)
-        favAdaptor = FavMoviesAdaptor(favlist as List<FavMovie>, this.activity!!) {
+        favAdaptor = FavMoviesAdaptor(
+            favlist as List<FavMovie>,
+            this.activity!!
+        ) {
             val intent = Intent(activity?.applicationContext, DetailsActivity::class.java)
-            intent.putExtra(MOVIE_KEY, it.id)
+            intent.putExtra(Constants.MOVIE_ID_KEY, it.id)
             startActivity(intent)
         }
 

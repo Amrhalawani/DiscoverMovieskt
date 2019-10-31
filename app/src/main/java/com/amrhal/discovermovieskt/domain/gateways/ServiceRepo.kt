@@ -6,8 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import com.amrhal.discovermovieskt.BuildConfig
 import com.amrhal.discovermovieskt.domain.entities.Actor
 import com.amrhal.discovermovieskt.domain.entities.Movie
+import com.amrhal.discovermovieskt.domain.entities.MovieDetailsRes
 import com.amrhal.discovermovieskt.domain.entities.Trailer
 import com.google.gson.Gson
+import io.reactivex.Observable
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -154,4 +156,25 @@ object ServiceRepo {
         })
         return data
     }
+
+    fun getMovieDetails (movieID:String) : LiveData<MovieDetailsRes> {
+        val data =  MutableLiveData<MovieDetailsRes>()
+        retrofit?.getMovieDetails(movieID,BuildConfig.API_KEY)?.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                val MResponse:String? = response.body()?.string()
+                val gson = Gson()
+                val movieDetailsRes = gson.fromJson(MResponse, MovieDetailsRes::class.java)
+                data.value = movieDetailsRes
+            }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.e("tag","onFailure throw : ${t.localizedMessage}")
+            }
+        })
+        return data
+    }
+
+    //use this after changing every thing to rx
+//    fun getMovieDetails(movieId: Int): Observable<ResponseBody> {
+//        return RetrofitClientInstance.getInstance().getMovieDetails(BuildConfig.API_KEY, movieId)
+//    }
 }

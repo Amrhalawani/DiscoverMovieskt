@@ -13,7 +13,7 @@
     <fragment android:id="@+id/search_frag_dest"
               android:name="com.amrhal.discovermovieskt.view.main.fragments.SearchFragment" android:label="frag_search"
               tools:layout="@layout/frag_search"/>
-    <fragment android:id="@+id/fev_frag_dest" android:name="com.amrhal.discovermovieskt.view.main.fragments.FavFragment"
+    <fragment android:id="@+id/fev_frag_dest" android:name="com.amrhal.discovermovieskt.view.main.fragments.favourites.FavFragment"
               android:label="frag_fav_movies" tools:layout="@layout/frag_fav_movies"/>
     <fragment android:id="@+id/info_frag_dest" android:name="com.amrhal.discovermovieskt.view.main.fragments.InfoFragment"
               android:label="frag_info" tools:layout="@layout/frag_info"/>
