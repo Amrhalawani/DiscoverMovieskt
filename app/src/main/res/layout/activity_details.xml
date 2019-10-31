@@ -47,14 +47,15 @@
     <include layout="@layout/activity_content_details"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/favButton"
+            android:id="@+id/favbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
+            app:backgroundTint="@color/floating_color"
             app:layout_anchor="@+id/app_bar"
             app:layout_anchorGravity="bottom|end"
+
             app:pressedTranslationZ="12dp"
-            app:rippleColor="#79e995"
             android:src="@drawable/ic_fav_unchecked"/>
 
     <!--<ToggleButton-->

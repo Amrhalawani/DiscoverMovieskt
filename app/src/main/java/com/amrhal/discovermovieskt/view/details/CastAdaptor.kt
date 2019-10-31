@@ -43,7 +43,6 @@ class CastAdaptor(var actorsList: List<Actor.Cast>,
 
 
 
-    // Gets the number of animals in the list
     override fun getItemCount(): Int {
         return actorsList.size
     }
@@ -71,7 +70,6 @@ class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             .load("$PIC_BASE_URL_185$url")
             .placeholder(if (gender == 2)R.drawable.ic_man_silhouette else R.drawable.ic_woman_silhouette ).into(this)
 
-        Log.e("tag","$PIC_BASE_URL_185$url")
     }
 
 }

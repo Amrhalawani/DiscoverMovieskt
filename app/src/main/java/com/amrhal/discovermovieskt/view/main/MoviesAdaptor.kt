@@ -37,11 +37,6 @@ class MoviesAdaptor(var moviesList: List<Movie.MovieResult>,
         holder.bind(moviesList[position], listener)
 
     }
-
-
-
-
-    // Gets the number of animals in the list
     override fun getItemCount(): Int {
         return moviesList.size
     }
@@ -52,9 +47,9 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
     fun bind(movieitem: Movie.MovieResult, listener: (Movie.MovieResult) -> Unit) = with(itemView) {
-        itemView.movieposterIV_ID.loadUrlPicasso(movieitem.posterPath)
+        itemView.image_poster_item.loadUrlPicasso(movieitem.posterPath)
         itemView.text_name_movie_item.text = movieitem.title
-        itemView.movie_rate.text = "★ " + movieitem.voteAverage.toString()
+        itemView.text_rate_item.text = "★ " + movieitem.voteAverage.toString()
 
         itemView.release_date.text = if (movieitem.releaseDate?.substring(0,4) == currentYear.toString()) movieitem.releaseDate else movieitem.releaseDate?.substring(0,4)
 

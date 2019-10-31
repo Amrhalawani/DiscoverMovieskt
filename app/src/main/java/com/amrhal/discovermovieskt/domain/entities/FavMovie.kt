@@ -25,8 +25,6 @@ val releaseDate: String?,
 
 @SerializedName("title")
 val title: String?,
-@SerializedName("video")
-val video: Boolean?,
 @SerializedName("vote_average")
 val voteAverage: Double?
 )
@@ -39,7 +37,6 @@ val voteAverage: Double?
          "",
          "",
          "",
-         false,
          0.0
      )
 }

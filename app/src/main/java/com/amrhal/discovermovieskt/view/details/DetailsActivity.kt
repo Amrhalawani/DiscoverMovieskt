@@ -2,6 +2,7 @@ package com.amrhal.discovermovieskt.view.details
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 
@@ -23,28 +24,104 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_content_details.*
 import kotlinx.android.synthetic.main.activity_details.*
 import android.view.MenuItem
+import com.amrhal.discovermovieskt.domain.entities.FavMovie
+import com.amrhal.discovermovieskt.view.main.fragments.FavFragmentVM
+import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
+import kotlin.collections.ArrayList
 
 
 class DetailsActivity : AppCompatActivity() {
+    var id: Int = 0
     var list: ArrayList<Actor.Cast> = arrayListOf()
     var listTrailer: ArrayList<Trailer.Result> = arrayListOf()
 
+    private lateinit var selectedMovie: Movie.MovieResult
     var adaptor: CastAdaptor? = null
     var adaptortrailer: TrailerAdaptor? = null
+
+    private lateinit var favVM: FavFragmentVM
+
+    var isFavourite = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
-        val selectedMovie = intent.getParcelableExtra<Movie.MovieResult>(MOVIE_KEY)
-        val id: String = selectedMovie.id.toString()
+        selectedMovie = intent.getParcelableExtra<Movie.MovieResult>(MOVIE_KEY)
+        id = selectedMovie.id!!
 
         setupActionBar()
-        setupUI(selectedMovie)
+        setupUI()
         setupTrailerRV()
-        getTrailers(id)
+        getTrailers()
         setupCastRV()
-        getCast(id)
+        getCast()
+
+
+        favVM = ViewModelProviders.of(this).get(FavFragmentVM::class.java)
+
+
+        favbtn.setOnClickListener {
+
+            isFavourite = if (!isFavourite) {
+                insertToFavourites()
+                true
+
+            } else {
+                deleteMovieFromFavourites()
+                favbtn.setImageResource(R.drawable.ic_fav_unchecked)
+                false
+            }
+
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkFavouriteStatus()
+    }
+
+    private fun deleteMovieFromFavourites() {
+        favVM.delete(id)
+    }
+
+    private fun checkFavouriteStatus() {
+
+        favVM.getFavMovies().observe(this, Observer { favMovies ->
+
+            Observable.fromIterable(favMovies)
+                .filter { it.id == id }
+                .subscribe(object : io.reactivex.Observer<FavMovie> {
+                    override fun onNext(t: FavMovie) {
+                        Log.e("tag", "${t.id}")
+                        favbtn.setImageResource(R.drawable.ic_fav_checked)
+                        isFavourite = true
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+                    override fun onError(e: Throwable) {
+                        Log.e("tag", "onError: " + e.message)
+                        favbtn.setImageResource(R.drawable.ic_fav_unchecked)
+                        isFavourite = false
+                    }
+                    override fun onComplete() {
+                    }
+                }
+                )
+        })
+    }
+
+    private fun insertToFavourites() {
+
+        val newMovie = FavMovie(
+            selectedMovie.adult, selectedMovie.id,
+            selectedMovie.popularity, selectedMovie.posterPath, selectedMovie.releaseDate,
+            selectedMovie.title, selectedMovie.voteAverage
+        )
+        favVM.insert(newMovie)
     }
 
     private fun setupActionBar() {
@@ -54,15 +131,14 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // handle arrow click here
-        if (item.itemId === android.R.id.home) {
+        if (item.itemId == android.R.id.home) {
             finish()
         }
         return super.onOptionsItemSelected(item)
     }
 
     @SuppressLint("SetTextI18n")
-    private fun setupUI(selectedMovie: Movie.MovieResult) {
+    private fun setupUI() {
         Picasso.get().load("$PIC_BASE_URL_185${selectedMovie.posterPath}").into(poster_detail)
         avarege.text = selectedMovie.voteAverage.toString()
         titley.text = selectedMovie.title
@@ -79,14 +155,18 @@ class DetailsActivity : AppCompatActivity() {
         )
 
         adaptor = CastAdaptor(list as List<Actor.Cast>, this) {
-            Toast.makeText(applicationContext, "cast id ${it.castId}/ id ${it.id} / creditId ${it.creditId} ", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                applicationContext,
+                "cast id ${it.castId}/ id ${it.id} / creditId ${it.creditId} ",
+                Toast.LENGTH_SHORT
+            ).show()
         }
         recyclerview_cast.adapter = adaptor
     }
 
-    fun getCast(id: String) {
+    fun getCast() {
         val model = ViewModelProviders.of(this).get(DetailActivityViewModel::class.java)
-        model.getCast(id).observe(this, Observer<Actor> { result ->
+        model.getCast(id.toString()).observe(this, Observer<Actor> { result ->
             list = result.cast as ArrayList<Actor.Cast>
             if (list.size == 0) {
                 layout_actors.visibility = View.GONE
@@ -110,9 +190,9 @@ class DetailsActivity : AppCompatActivity() {
 
     }
 
-    fun getTrailers(id: String) {
+    fun getTrailers() {
         val modelt = ViewModelProviders.of(this).get(DetailActivityViewModel::class.java)
-        modelt.getTrailer(id).observe(this, Observer<Trailer> { result ->
+        modelt.getTrailer(id.toString()).observe(this, Observer<Trailer> { result ->
             listTrailer = result.results as ArrayList<Trailer.Result>
             if (listTrailer.size == 0) {
                 layout_trailer_details.visibility = View.GONE
@@ -120,7 +200,7 @@ class DetailsActivity : AppCompatActivity() {
                 adaptortrailer?.updateMoviesList(listTrailer)
             }
         })
-
     }
-
 }
+
+

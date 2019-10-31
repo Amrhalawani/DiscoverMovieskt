@@ -2,20 +2,23 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
              tools:context="com.amrhal.discovermovieskt.view.main.fragments.FavFragment">
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Under Construction..."
-            android:fontFamily="@font/coustard"
-            android:textColor="@color/colorAccent"
-            android:layout_gravity="center"
-            android:textSize="22sp"/>
-    <Button
-            android:text="Add new Movie Test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/button3"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_fav"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:visibility="visible"
+          />
+
+    <ProgressBar android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:id="@+id/progress_fav"
+                 android:layout_gravity="center"
+                 />
 
 
 </FrameLayout>

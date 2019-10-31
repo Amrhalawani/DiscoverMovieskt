@@ -13,4 +13,7 @@ class DBRepo(private val favDao: FavMoviesDAO) {
     suspend fun insert(newMovie: FavMovie) {
         favDao.insert(newMovie)
     }
+    suspend fun delete(movieId: Int) {
+        favDao.delete(movieId)
+    }
 }

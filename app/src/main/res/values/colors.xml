@@ -16,6 +16,7 @@
     <color name="gradiant_start">#2d2c24</color>
     <color name="gradiant_end">#4e4747</color>
     <color name="gray1">#252424</color>
+    <color name="floating_color">#494342</color>
 </resources>
 
 

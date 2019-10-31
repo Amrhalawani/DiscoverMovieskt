@@ -188,11 +188,11 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="e8e8e8" />
-                            <entry key="height" value="64" />
-                            <entry key="outputName" value="ic_movie_trailer_sign" />
+                            <entry key="height" value="602" />
+                            <entry key="outputName" value="ic_star_of_favorites_outline" />
                             <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="C:\Users\Amr Halawani\Desktop\movie_trailer_sign.svg" />
-                            <entry key="width" value="64" />
+                            <entry key="sourceFile" value="C:\Users\Amr Halawani\Desktop\star-of-favorites-outline.svg" />
+                            <entry key="width" value="602" />
                           </map>
                         </option>
                       </PersistentState>

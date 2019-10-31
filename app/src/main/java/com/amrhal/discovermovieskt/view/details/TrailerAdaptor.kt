@@ -43,7 +43,6 @@ class TrailerAdaptor(var trailersList: List<Trailer.Result>,
 
     // Gets the number of animals in the list
     override fun getItemCount(): Int {
-        Log.e("tag", "List getItemCount() = ${trailersList.size}")
         return trailersList.size
     }
 
@@ -64,7 +63,6 @@ class TrailerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     //extension Fun
     private fun ImageView.loadUrlPicasso(url: String) {
         Picasso.get().load(url).into(this)
-        Log.e("tag", "$url")
     }
 
     private fun thumbnailURL(ourkey: String): String {
