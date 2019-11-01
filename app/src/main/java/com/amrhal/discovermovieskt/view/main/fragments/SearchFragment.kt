@@ -66,7 +66,6 @@ class SearchFragment : Fragment() {
         view.rv_search_movies.layoutManager = GridLayoutManager(activity, 1)
 
         adaptor = SearchedMoviesAdaptor(resultList as List<Movie.MovieResult>, this.activity!!) {
-            Toast.makeText(activity?.applicationContext, "${it.title} Clicked", Toast.LENGTH_SHORT).show()
          val intent = Intent(activity?.applicationContext, DetailsActivity::class.java)
            intent.putExtra(Constants.MOVIE_ID_KEY, it.id)
             startActivity(intent)

@@ -13,7 +13,6 @@ import com.amrhal.discovermovieskt.R
 import com.amrhal.discovermovieskt.domain.core.Constants
 import com.amrhal.discovermovieskt.domain.entities.FavMovie
 import com.amrhal.discovermovieskt.view.details.DetailsActivity
-import com.amrhal.discovermovieskt.view.main.fragments.FavMoviesAdaptor
 import kotlinx.android.synthetic.main.frag_fav_movies.*
 import kotlinx.android.synthetic.main.frag_fav_movies.view.*
 

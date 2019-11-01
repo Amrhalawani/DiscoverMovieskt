@@ -1,4 +1,4 @@
-package com.amrhal.discovermovieskt.view.main.fragments
+package com.amrhal.discovermovieskt.view.main.fragments.favourites
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -25,7 +25,13 @@ class FavMoviesAdaptor(var moviesList: List<FavMovie>,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavMovieViewHolder {
-        return FavMovieViewHolder(LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false))
+        return FavMovieViewHolder(
+            LayoutInflater.from(context).inflate(
+                R.layout.item_movie,
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: FavMovieViewHolder, position: Int) {
@@ -48,7 +54,7 @@ class FavMovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         itemView.release_date.text = if (movieitem.releaseDate?.substring(0,4) == currentYear.toString()) movieitem.releaseDate else movieitem.releaseDate?.substring(0,4)
 
-
+        itemView.image_fav_sign_m_item.visibility = View.VISIBLE
         setOnClickListener { listener(movieitem) }
 
 

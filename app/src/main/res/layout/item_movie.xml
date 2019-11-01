@@ -8,14 +8,31 @@
               android:clickable="true"
               android:layout_margin="5dp" android:focusable="true">
 
-    <ImageView
-            android:id="@+id/image_poster_item"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:adjustViewBounds="true"
-            android:focusable="true"
-            android:scaleType="fitCenter"
-    />
+
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="300dp">
+        <ImageView
+                android:id="@+id/image_poster_item"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:adjustViewBounds="true"
+                android:focusable="true"
+                android:scaleType="fitCenter"
+        />
+
+        <ImageView
+                android:id="@+id/image_fav_sign_m_item"
+                android:visibility="gone"
+                android:layout_width="24dp"
+                   android:layout_height="24dp"
+                   android:src="@drawable/ic_fav_checked"
+                   android:layout_gravity="end"
+                   android:layout_margin="14dp"
+        />
+
+    </FrameLayout>
+
+
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
@@ -38,11 +55,11 @@
         <ImageView
                 android:id="@+id/image_has_video_movie_item"
                 android:layout_width="20dp"
-                   android:layout_height="20dp"
-                   android:layout_gravity="center"
-                   android:layout_weight="1"
-                   android:layout_marginEnd="10dp"
-                   android:src="@drawable/ic_movie_video_sign"/>
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_movie_video_sign"/>
     </LinearLayout>
 
 
