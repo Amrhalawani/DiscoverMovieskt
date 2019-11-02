@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools" android:id="@+id/bottom_sheet_layout"
+              android:layout_width="match_parent"
+              android:padding="20dp"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              app:behavior_hideable="true"
+              android:background="@color/colorPrimaryDark"
+              android:animateLayoutChanges="true"
+              android:layout_gravity="bottom"
+              app:behavior_peekHeight="500dp"
+              android:minHeight="700dp"
+              app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ImageView
+                android:id="@+id/image_actor_details"
+                android:layout_width="150dp"
+                android:scaleType="centerCrop"
+                android:layout_height="200dp"
+                app:srcCompat="@drawable/user_placeholder"
+                 app:layout_constraintTop_toTopOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+                android:id="@+id/text_actor_name_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="actorName_detail"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@+id/image_actor_details"
+               android:layout_marginTop="16dp"
+                android:textSize="18sp"
+                app:layout_constraintTop_toTopOf="parent"
+
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+                android:id="@+id/text_actor_birthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="text_birthday"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@+id/image_actor_details"
+
+                 app:layout_constraintTop_toBottomOf="@+id/text_actor_name_detail"
+                 app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+                android:id="@+id/text_actor_bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_actor_details"
+        />
+
+        <LinearLayout
+                android:id="@+id/layout_actor_death_day"
+                android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:layout_marginTop="8dp"
+                      app:layout_constraintTop_toBottomOf="@+id/text_actor_bio">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/died"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toEndOf="@+id/image_actor_details"
+                    app:layout_constraintTop_toBottomOf="@+id/text_actor_bio"/>
+            <TextView
+                    android:id="@+id/text_deathday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="text_deathday"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toEndOf="@+id/image_actor_details"
+                    app:layout_constraintTop_toBottomOf="@+id/text_actor_bio"/>
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</LinearLayout>

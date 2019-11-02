@@ -50,5 +50,9 @@ interface MoviesApi {
     @GET("movie/{movie_id}")
     fun getMovieDetails( @Path("movie_id") movieId: String, @Query("api_key") apiKey: String): Call<ResponseBody>
 
+
+    @GET("person/{person_id}")
+    fun getActorDetails( @Path("person_id") movieId: String, @Query("api_key") apiKey: String): Call<ResponseBody>
+
 }
 

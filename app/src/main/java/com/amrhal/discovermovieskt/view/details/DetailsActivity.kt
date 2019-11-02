@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -20,11 +19,14 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_content_details.*
 import kotlinx.android.synthetic.main.activity_details.*
 import android.view.MenuItem
+import com.amrhal.discovermovieskt.domain.core.Constants
 import com.amrhal.discovermovieskt.domain.core.Constants.MOVIE_ID_KEY
 import com.amrhal.discovermovieskt.domain.entities.*
 import com.amrhal.discovermovieskt.view.main.fragments.favourites.FavFragmentVM
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
+import kotlinx.android.synthetic.main.bsheet_actors.view.*
 import kotlin.collections.ArrayList
 
 
@@ -45,7 +47,7 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
-        id = intent.getIntExtra(MOVIE_ID_KEY,0)
+        id = intent.getIntExtra(MOVIE_ID_KEY, 0)
 
         setupActionBar()
         getMovieDetails()
@@ -99,11 +101,13 @@ class DetailsActivity : AppCompatActivity() {
                     override fun onSubscribe(d: Disposable) {
 
                     }
+
                     override fun onError(e: Throwable) {
                         Log.e("tag", "onError: " + e.message)
                         favbtn.setImageResource(R.drawable.ic_fav_unchecked)
                         isFavourite = false
                     }
+
                     override fun onComplete() {
                     }
                 }
@@ -140,6 +144,7 @@ class DetailsActivity : AppCompatActivity() {
         avarege.text = selectedMovie.voteAverage.toString()
         titley.text = selectedMovie.title
         releasedate.text = selectedMovie.releaseDate.toString()
+        text_tagline.text = selectedMovie.tagline
         over_mentID.text = selectedMovie.overview.toString()
         original_titleID.text = "${selectedMovie.originalTitle.toString()} (${selectedMovie.originalLanguage})"
         Picasso.get().load("$PIC_BASE_URL_500${selectedMovie.backdropPath}").into(backImagecollapsedID)
@@ -152,11 +157,8 @@ class DetailsActivity : AppCompatActivity() {
         )
 
         adaptor = CastAdaptor(list as List<Actor.Cast>, this) {
-            Toast.makeText(
-                applicationContext,
-                "cast id ${it.castId}/ id ${it.id} / creditId ${it.creditId} ",
-                Toast.LENGTH_SHORT
-            ).show()
+
+            showActorDialog(it.id!!)
         }
         recyclerview_cast.adapter = adaptor
     }
@@ -164,7 +166,7 @@ class DetailsActivity : AppCompatActivity() {
     fun getMovieDetails() {
         val model = ViewModelProviders.of(this).get(DetailActivityViewModel::class.java)
         model.getMovieDetail(id.toString()).observe(this, Observer<MovieDetailsRes> { result ->
-         selectedMovie = result
+            selectedMovie = result
             setupUI()
             progress_details.visibility = View.GONE
         })
@@ -208,6 +210,38 @@ class DetailsActivity : AppCompatActivity() {
             }
         })
     }
+
+    fun showActorDialog(personId: Int) {
+
+
+        val view = layoutInflater.inflate(R.layout.bsheet_actors, null)
+        getActorDetail(personId, view)
+
+
+
+        val dialog = BottomSheetDialog(this)
+
+        dialog.setContentView(view)
+        dialog.show()
+
+
+    }
+
+    private fun getActorDetail(personId: Int, view: View) {
+        val modelt = ViewModelProviders.of(this).get(DetailActivityViewModel::class.java)
+        modelt.getActorDetails(personId.toString()).observe(this, Observer<ActorDetailsRes> { r ->
+            view.text_actor_birthday.text = r.birthday
+            view.text_actor_bio.text = r.biography
+            view.text_actor_name_detail.text = r.name
+            Picasso.get().load("${Constants.PIC_BASE_URL_185}${r.profilePath}").into(view.image_actor_details)
+
+            if (r.deathday == null) view.layout_actor_death_day.visibility = View.GONE
+            else view.text_deathday.text = r.deathday
+
+        })
+
+    }
+
 }
 
 
