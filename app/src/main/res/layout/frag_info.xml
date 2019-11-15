@@ -12,10 +12,10 @@
             android:orientation="vertical">
 
         <ImageView
-                android:layout_width="100dp"
+                android:layout_width="200dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:src="@drawable/movielix_logo1"
+                android:src="@drawable/movielix_text_logo1"
                 android:fontFamily="@font/coustard"
                 android:textColor="@color/colorAccent"
                 android:textSize="22sp"/>

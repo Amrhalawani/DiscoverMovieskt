@@ -86,7 +86,21 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="color" value="000000" />
+                                                <entry key="color" value="fdfdfd" />
+                                                <entry key="scalingPercent" value="112" />
+                                                <entry key="trimmed" value="true" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                      <entry key="foregroundTextAsset">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="fontFamily" value="Roadtest" />
+                                                <entry key="text" value="M" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -97,13 +111,12 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="e4e5e6" />
+                                      <entry key="backgroundColor" value="1d1d1d" />
                                       <entry key="backgroundLayerName" value="ic_launcher_background" />
-                                      <entry key="foregroundImage" value="C:\AmrDisk\myProgramsKt\DiscoverMovieskt\app\src\main\res\drawable\movielix_logo1.png" />
+                                      <entry key="foregroundAssetType" value="TEXT" />
+                                      <entry key="foregroundImage" value="C:\AmrDisk\myProgramsKt\DiscoverMovieskt\app\src\main\res\drawable\pic_1.jpg" />
                                       <entry key="foregroundLayerName" value="ic_launcher_foreground" />
-                                      <entry key="legacyIconShape" value="CIRCLE" />
-                                      <entry key="outputName" value="ic_logo1" />
-                                      <entry key="webIconShape" value="CIRCLE" />
+                                      <entry key="outputName" value="movielix_logo" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -1,10 +1,14 @@
 package com.amrhal.discovermovieskt.view.main.fragments.favourites
 
+import android.app.ActivityOptions
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,6 +17,7 @@ import com.amrhal.discovermovieskt.R
 import com.amrhal.discovermovieskt.domain.core.Constants
 import com.amrhal.discovermovieskt.domain.entities.FavMovie
 import com.amrhal.discovermovieskt.view.details.DetailsActivity
+import kotlinx.android.synthetic.main.activity_content_details.*
 import kotlinx.android.synthetic.main.frag_fav_movies.*
 import kotlinx.android.synthetic.main.frag_fav_movies.view.*
 
@@ -35,10 +40,20 @@ class FavFragment : Fragment() {
         favAdaptor = FavMoviesAdaptor(
             favlist as List<FavMovie>,
             this.activity!!
-        ) {
+        ) {movie,imgView->
+
             val intent = Intent(activity?.applicationContext, DetailsActivity::class.java)
-            intent.putExtra(Constants.MOVIE_ID_KEY, it.id)
-            startActivity(intent)
+            intent.putExtra(Constants.MOVIE_ID_KEY, movie.id)
+            intent.putExtra(Constants.MOVIE_POSTER_IMG_KEY, movie.posterPath)
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                val options = ActivityOptions
+                    .makeSceneTransitionAnimation(activity, imgView,  ViewCompat.getTransitionName(imgView))
+                startActivity(intent, options.toBundle())
+            } else {
+                startActivity(intent)
+            }
+
         }
 
         rootview.rv_fav.adapter = favAdaptor

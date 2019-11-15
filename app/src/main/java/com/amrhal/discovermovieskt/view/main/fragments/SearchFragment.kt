@@ -68,6 +68,7 @@ class SearchFragment : Fragment() {
         adaptor = SearchedMoviesAdaptor(resultList as List<Movie.MovieResult>, this.activity!!) {
          val intent = Intent(activity?.applicationContext, DetailsActivity::class.java)
            intent.putExtra(Constants.MOVIE_ID_KEY, it.id)
+            intent.putExtra(Constants.MOVIE_POSTER_IMG_KEY, it.posterPath)
             startActivity(intent)
         }
         view.rv_search_movies.adapter = adaptor

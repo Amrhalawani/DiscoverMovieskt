@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.amrhal.discovermovieskt.R
 import com.amrhal.discovermovieskt.domain.core.Constants.PIC_BASE_URL_300
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.item_movie.view.*
 
 class FavMoviesAdaptor(var moviesList: List<FavMovie>,
                        var context: Context,
-                       val listener: (FavMovie) -> Unit
+                       val listener: (FavMovie, View) -> Unit
 ) : RecyclerView.Adapter<FavMovieViewHolder>() {
 
     fun updateMoviesList(newitems: List<FavMovie>) {
@@ -47,7 +48,7 @@ class FavMoviesAdaptor(var moviesList: List<FavMovie>,
 class FavMovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
-    fun bind(movieitem: FavMovie, listener: (FavMovie) -> Unit) = with(itemView) {
+    fun bind(movieitem: FavMovie, listener: (FavMovie,View) -> Unit) = with(itemView) {
         itemView.image_poster_item.loadUrlPicasso(movieitem.posterPath)
         itemView.text_name_movie_item.text = movieitem.title
         itemView.text_rate_item.text = "★ " + movieitem.voteAverage.toString()
@@ -55,7 +56,9 @@ class FavMovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.release_date.text = if (movieitem.releaseDate?.substring(0,4) == currentYear.toString()) movieitem.releaseDate else movieitem.releaseDate?.substring(0,4)
 
         itemView.image_fav_sign_m_item.visibility = View.VISIBLE
-        setOnClickListener { listener(movieitem) }
+
+        ViewCompat.setTransitionName(itemView.image_poster_item, movieitem.id.toString())
+        setOnClickListener { listener(movieitem,itemView.image_poster_item) }
 
 
     }

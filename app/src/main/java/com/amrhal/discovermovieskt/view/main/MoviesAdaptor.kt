@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.amrhal.discovermovieskt.R
 import com.amrhal.discovermovieskt.domain.core.Constants.PIC_BASE_URL_300
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.item_movie.view.*
 
 class MoviesAdaptor(var moviesList: List<Movie.MovieResult>,
                     var context: Context,
-                    val listener: (Movie.MovieResult) -> Unit
+                    val listener: (Movie.MovieResult,View) -> Unit
 ) : RecyclerView.Adapter<MovieViewHolder>() {
 
     fun updateMoviesList(newitems: List<Movie.MovieResult>) {
@@ -46,7 +47,7 @@ class MoviesAdaptor(var moviesList: List<Movie.MovieResult>,
 class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
-    fun bind(movieitem: Movie.MovieResult, listener: (Movie.MovieResult) -> Unit) = with(itemView) {
+    fun bind(movieitem: Movie.MovieResult, listener: (Movie.MovieResult, View) -> Unit) = with(itemView) {
         itemView.image_poster_item.loadUrlPicasso(movieitem.posterPath)
         itemView.text_name_movie_item.text = movieitem.title
         itemView.text_rate_item.text = "★ " + movieitem.voteAverage.toString()
@@ -57,7 +58,9 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             itemView.image_has_video_movie_item.visibility = View.INVISIBLE
         else itemView.image_has_video_movie_item.visibility = View.VISIBLE
 
-        setOnClickListener { listener(movieitem) }
+        ViewCompat.setTransitionName(itemView.image_poster_item, movieitem.id.toString())
+
+        setOnClickListener { listener(movieitem, itemView.image_poster_item) }
 
 
     }
@@ -68,14 +71,5 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         //Log.e("tag","https://image.tmdb.org/t/p/w185$url")
     }
 
-    //extension Fun
-    private fun ImageView.loadUrlGlide(url: String) {
-//Todo have a look here and fix memory leak, its consume 180mb more than picasso for 80 pic.
-
-//        GlideApp.with(context).asBitmap()
-//            .load(Uri.parse("https://image.tmdb.org/t/p/w185$url"))
-//            .into(this)
-//        Log.e("tag","https://image.tmdb.org/t/p/w185$url")
-    }
 
 }

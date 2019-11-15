@@ -28,10 +28,13 @@ import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.bsheet_actors.view.*
 import kotlin.collections.ArrayList
+import android.os.Build
+import com.amrhal.discovermovieskt.domain.core.Constants.MOVIE_POSTER_IMG_KEY
 
 
 class DetailsActivity : AppCompatActivity() {
     var id: Int = 0
+     var posterPath = ""
     var list: ArrayList<Actor.Cast> = arrayListOf()
     var listTrailer: ArrayList<Trailer.Result> = arrayListOf()
 
@@ -48,8 +51,11 @@ class DetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_details)
 
         id = intent.getIntExtra(MOVIE_ID_KEY, 0)
+        posterPath = intent.getStringExtra(MOVIE_POSTER_IMG_KEY)
+
 
         setupActionBar()
+        showPosterWithSharedAnim()
         getMovieDetails()
 
         setupTrailerRV()
@@ -74,6 +80,17 @@ class DetailsActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    private fun showPosterWithSharedAnim() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            poster_detail.transitionName = id.toString().trim()
+        }
+
+        Picasso
+            .get()
+            .load("$PIC_BASE_URL_185${posterPath}")
+            .into(poster_detail)
     }
 
     override fun onResume() {
@@ -140,7 +157,7 @@ class DetailsActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun setupUI() {
-        Picasso.get().load("$PIC_BASE_URL_185${selectedMovie.posterPath}").into(poster_detail)
+
         avarege.text = selectedMovie.voteAverage.toString()
         titley.text = selectedMovie.title
         releasedate.text = selectedMovie.releaseDate.toString()
@@ -163,7 +180,7 @@ class DetailsActivity : AppCompatActivity() {
         recyclerview_cast.adapter = adaptor
     }
 
-    fun getMovieDetails() {
+    private fun getMovieDetails() {
         val model = ViewModelProviders.of(this).get(DetailActivityViewModel::class.java)
         model.getMovieDetail(id.toString()).observe(this, Observer<MovieDetailsRes> { result ->
             selectedMovie = result
@@ -237,6 +254,8 @@ class DetailsActivity : AppCompatActivity() {
 
             if (r.deathday == null) view.layout_actor_death_day.visibility = View.GONE
             else view.text_deathday.text = r.deathday
+
+            view.progress_actor_bs.visibility=View.GONE
 
         })
 

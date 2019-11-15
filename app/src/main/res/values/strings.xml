@@ -81,5 +81,6 @@
     <string name="search_here_for_a_movie">Search here for a Movie...</string>
     <string name="please_ckick_back_again_to_exit">Please click BACK again to exit</string>
     <string name="died">Died :</string>
+    <string name="logo">logo</string>
 
 </resources>

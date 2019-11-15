@@ -21,5 +21,7 @@ object Constants {
 
     //intent data
     val MOVIE_ID_KEY = "movieid"
+    val MOVIE_POSTER_IMG_KEY = "posterm"
+
 
 }

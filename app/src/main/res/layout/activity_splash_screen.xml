@@ -9,39 +9,49 @@
         tools:context=".view.SplashScreen"
 >
 
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/pic_3"
+            app:layout_constraintStart_toStartOf="parent"
+            android:alpha="0.2"
+
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            android:id="@+id/image_background_splash"/>
 
     <ImageView
-            android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
             android:src="@drawable/movielix_text_logo1"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="108dp"
-            android:padding="50dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="1.0" android:id="@+id/imageView"/>
+            android:layout_marginTop="120dp"
+            android:transitionName="@string/logo"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/image_logo_splash"/>
+
+
     <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:progressBackgroundTint="#000"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-           android:layout_marginTop="88dp"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" android:id="@+id/progressBar"/>
+            android:indeterminateTint="@color/white"
+            android:id="@+id/progressBar"
+            app:layout_constraintHorizontal_bias="0.5" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView"/>
 
 
     <ImageView
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
             android:src="@drawable/powered_by_db"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar"
-            app:layout_constraintVertical_bias="0.771" app:layout_constraintHorizontal_bias="0.498"/>
+            android:id="@+id/imageView"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
