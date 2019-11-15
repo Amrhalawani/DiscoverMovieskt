@@ -2,6 +2,7 @@ package com.amrhal.discovermovieskt.view.main.fragments
 
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.amrhal.discovermovieskt.R
+import kotlinx.android.synthetic.main.frag_info.*
 import kotlinx.android.synthetic.main.frag_info.view.*
 
 
@@ -33,7 +35,19 @@ class InfoFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        displayAppVersion()
 
+    }
+
+    private fun displayAppVersion() {
+        try {
+            val pInfo = activity?.packageManager?.getPackageInfo(activity?.packageName,0)
+            val version = pInfo?.versionName
+            text_App_version_info_frag.text = "Version  $version"
+
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
     }
 
 

@@ -34,7 +34,7 @@ class SplashScreen : AppCompatActivity() {
                     val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         this,
                         image_logo_splash,
-                        "logo"
+                        getString(R.string.logo)
                     )
                     startActivity(i, options.toBundle())
                 } else {
