@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:background="@drawable/user_placeholder"
-        tools:context="com.amrhal.discovermovieskt.view.details.DetailsActivity">
+        tools:context="com.amrhal.movielix.view.details.DetailsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"

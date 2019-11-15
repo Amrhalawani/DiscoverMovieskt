@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/user_placeholder"
-        tools:context="com.amrhal.discovermovieskt.view.main.fragments.favourites.FavFragment">
+        tools:context="com.amrhal.movielix.view.main.fragments.favourites.FavFragment">
 
 
     <!--<Button-->
