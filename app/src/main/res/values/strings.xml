@@ -82,5 +82,9 @@
     <string name="please_ckick_back_again_to_exit">Please click BACK again to exit</string>
     <string name="died">Died :</string>
     <string name="logo">logo</string>
+    <string name="no_favorites_yet">No favorites yet</string>
+    <string name="check_favorite_button_for_movies_you_love_so_you_can_always_find_them_here">Check Favorite button for
+        Movies you love so you can always find them here
+    </string>
 
 </resources>

@@ -68,8 +68,15 @@ class FavFragment : Fragment() {
 
         favViewModel.favObservable!!.observe(this, Observer {
             progress_fav.visibility = View.GONE
-             it?.let { it ->
-                 favAdaptor.updateMoviesList(it)
+             it?.let {
+                 if (it.isNotEmpty()){
+                     layout_empty_view_fav.visibility = View.GONE
+                     favAdaptor.updateMoviesList(it)
+                 }else{
+                     layout_empty_view_fav.visibility = View.VISIBLE
+                     rv_fav.visibility = View.GONE
+                 }
+
             }
         })
 }
