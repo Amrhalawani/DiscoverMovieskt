@@ -33,7 +33,7 @@
                   android:layout_height="match_parent"
                   android:textColor="@color/white"
                   android:gravity="center"
-                  android:fontFamily="@font/drugs"
+                  android:fontFamily="@font/coustard"
                   android:textSize="28sp"
                   android:layout_margin="10dp"
         android:text="@string/no_favorites_yet"/>
@@ -42,7 +42,7 @@
                   android:layout_height="match_parent"
                   android:textColor="@color/white"
                   android:gravity="center"
-                  android:fontFamily="@font/drugs"
+                  android:fontFamily="@font/coustard"
                   android:layout_margin="20dp"
         android:text="@string/check_favorite_button_for_movies_you_love_so_you_can_always_find_them_here"/>
     </LinearLayout>
